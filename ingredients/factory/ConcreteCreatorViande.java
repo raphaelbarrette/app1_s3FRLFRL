@@ -3,9 +3,13 @@ package ingredients.factory;
 import ingredients.instanceIngredient.EtatIngredient;
 import ingredients.instanceIngredient.Ingredient;
 import ingredients.instanceIngredient.Viande;
+import ingredients.instanceIngredient.groupeIngredient;
 
 public class ConcreteCreatorViande implements creatorIngredient {
-    public Ingredient creer(String nom, EtatIngredient etat){
-        return new Viande(nom, etat);
+    public Ingredient creer(String nom,EtatIngredient etat){
+        return new Viande(nom,etat);
+    }
+    public static Ingredient creer(groupeIngredient groupe, String nom, double quantite){
+        return new Viande(groupe,nom,quantite);
     }
 }

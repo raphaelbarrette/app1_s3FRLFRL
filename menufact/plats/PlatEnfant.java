@@ -14,6 +14,9 @@ public class PlatEnfant extends PlatAuMenu{
     public double getProportion() {
         return proportion;
     }
+    public void setProportion(double proportion){
+        this.proportion = proportion;
+    }
 
     @Override
     public String toString() {

@@ -13,4 +13,10 @@ public class Viande extends Ingredient {
         setEtat(etat);
         set_Qty(qty);
     }
+    public Viande(groupeIngredient groupeingredient, String nom,double qty){
+        groupeingredient.getEtat().set_Qty(qty);
+        this.groupe=groupeingredient;
+        this.nom=nom;
+
+    }
 }

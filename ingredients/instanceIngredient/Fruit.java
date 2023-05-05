@@ -12,4 +12,11 @@ public class Fruit extends Ingredient {
         set_Qty(qty);
     }
 
+    public Fruit(groupeIngredient groupeingredient, String nom,double qty){
+        groupeingredient.getEtat().set_Qty(qty);
+        this.groupe=groupeingredient;
+        this.nom=nom;
+
+    }
+
 }

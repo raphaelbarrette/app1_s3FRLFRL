@@ -4,8 +4,9 @@ import ingredients.instanceIngredient.EtatIngredient;
 
 //abstract for bridge
 public abstract class Ingredient {
-    private String nom;
+    protected String nom;
     protected EtatIngredient etatIngredient;
+    protected groupeIngredient groupe;
 
     public Ingredient(){}
 

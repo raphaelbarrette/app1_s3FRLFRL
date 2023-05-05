@@ -6,5 +6,6 @@ public interface EtatIngredient
     public void set_Qty(double qty);
     public void addQty(Object other);
     public boolean equals(Object other);
+    public String getEtat();
 
 }

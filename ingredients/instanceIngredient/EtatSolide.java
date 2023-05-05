@@ -3,6 +3,7 @@ import ingredients.instanceIngredient.EtatIngredient;
 
 public class EtatSolide implements EtatIngredient {
     private double qtykg;
+    private String etat="Solide";
     public EtatSolide(double qty){
         set_Qty(qty);
     }
@@ -14,6 +15,9 @@ public class EtatSolide implements EtatIngredient {
     }
     public String toString(){
         return "Solide, Quantite : " + this.get_Qty() + "\n";
+    }
+    public String getEtat(){
+        return etat;
     }
 
     public boolean equals(Object other){

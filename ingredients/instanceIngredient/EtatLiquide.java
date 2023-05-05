@@ -4,12 +4,17 @@ import ingredients.instanceIngredient.EtatIngredient;
 
 public class EtatLiquide implements EtatIngredient {
     private double qtyL;
+    private String etat="liquide";
     public EtatLiquide(double qty){
         set_Qty(qty);
     }
     public double get_Qty(){
         return qtyL;
     }
+    public String getEtat(){
+        return etat;
+    }
+
     public void set_Qty(double qty){
         this.qtyL = qty;
     }
