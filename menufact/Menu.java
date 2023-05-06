@@ -15,6 +15,12 @@ public class Menu {
     private Menu(String description) {
         this.description = description;
     }
+    public Menu getInstance(String description){
+        if (instance == null){
+            instance = new Menu(description);
+        }
+        return instance;
+    }
 
     void ajoute (PlatAuMenu p)
     {

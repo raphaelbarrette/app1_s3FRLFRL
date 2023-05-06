@@ -12,10 +12,10 @@ public class Epice extends Ingredient
         set_Qty(qty);
     }
 
-    public Epice(groupeIngredient groupeingredient, String nom,double qty){
-        groupeingredient.getEtat().set_Qty(qty);
+    public Epice(groupeIngredient groupeingredient, String nom){
         this.groupe=groupeingredient;
         this.nom=nom;
+        this.setEtat(groupeingredient.getEtat());
 
     }
 }

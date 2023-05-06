@@ -1,6 +1,8 @@
 package menufact;
 
+import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.*;
+import inventaire.Inventaire;
 import menufact.facture.exceptions.FactureException;
 import menufact.exceptions.MenuException;
 import menufact.facture.Facture;
@@ -48,6 +50,34 @@ class TestIngredient {
     }
 
 }
+
+class InventaireTest {
+    Inventaire inventaire = Inventaire.getInstance();
+    @Test
+    void ajouter() throws IngredientException {
+        inventaire.ajouter(TypeIngredient.FRUIT, new EtatSolide(10), "Fraise");
+        inventaire.ajouter(TypeIngredient.VIANDE, new EtatSolide(5), "Boeuf");
+        System.out.print(inventaire.toString());
+    }
+    @Test
+    void getInstance() throws IngredientException{
+        inventaire.ajouter(TypeIngredient.FRUIT, new EtatSolide(10), "Fraise");
+        inventaire.ajouter(TypeIngredient.VIANDE, new EtatSolide(5), "Boeuf");
+        String toStringInventaire1 = inventaire.toString();
+        Inventaire inventaire1 = Inventaire.getInstance();
+        assertEquals(toStringInventaire1, inventaire1.toString());
+    }
+    @Test
+    void clearInventaire() throws IngredientException{
+        inventaire.ajouter(TypeIngredient.FRUIT, new EtatSolide(10), "Fraise");
+        inventaire.ajouter(TypeIngredient.VIANDE, new EtatSolide(5), "Boeuf");
+        inventaire.clearInventaire();
+        assertEquals(null, inventaire.returnInstance());
+        assertEquals(0, inventaire.getSize());
+    }
+
+}
+
 
 
 

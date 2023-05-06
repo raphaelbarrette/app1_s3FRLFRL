@@ -3,6 +3,7 @@ package menufact.facture;
 import menufact.Client;
 import menufact.facture.exceptions.FactureException;
 import menufact.plats.PlatChoisi;
+import menufact.chef;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,7 @@ public class Facture {
     private ArrayList<PlatChoisi> platchoisi = new ArrayList<PlatChoisi>();
     private int courant;
     private Client client;
+    private chef chef;
 
 
     /**********************Constantes ************/
@@ -73,16 +75,22 @@ public class Facture {
     /**
      * Permet de chager l'état de la facture à PAYEE
      */
-    public void payer()
-    {
-       etat = FactureEtat.PAYEE;
+    public void payer() {
+        if (etat.changerEtat(new FactureEtatPayee())){
+            etat = new FactureEtatPayee();
+        } else {
+            //throw exception
+        }
     }
     /**
      * Permet de chager l'état de la facture à FERMEE
      */
-    public void fermer()
-    {
-       etat = FactureEtat.FERMEE;
+    public void fermer() {
+       if (etat.changerEtat(new FactureEtatFermee())){
+           etat = new FactureEtatPayee();
+       } else {
+           //throw exception
+       }
     }
 
     /**
@@ -91,10 +99,11 @@ public class Facture {
      */
     public void ouvrir() throws FactureException
     {
-        if (etat == FactureEtat.PAYEE)
-            throw new FactureException("La facture ne peut pas être reouverte.");
-        else
-            etat = FactureEtat.OUVERTE;
+        if (etat.changerEtat(new FactureEtatOuverte())){
+            etat = new FactureEtatOuverte();
+        } else {
+            //throw exception
+        }
     }
 
     /**
@@ -112,7 +121,7 @@ public class Facture {
      */
     public Facture(String description) {
         date = new Date();
-        etat = FactureEtat.OUVERTE;
+        etat = new FactureEtatOuverte();
         courant = -1;
         this.description = description;
     }
@@ -124,10 +133,9 @@ public class Facture {
      */
     public void ajoutePlat(PlatChoisi p) throws FactureException
     {
-        if (etat == FactureEtat.OUVERTE)
-            platchoisi.add(p);
-        else
-            throw new FactureException("On peut ajouter un plat seulement sur une facture OUVERTE.");
+        if (etat instanceof FactureEtatOuverte){
+
+        }
     }
 
     /**
@@ -178,5 +186,8 @@ public class Facture {
         factureGenere += "          Le total est de:   " + total() + "\n";
 
         return factureGenere;
+    }
+    public void observer(chef cuisinier){
+        chef = cuisinier;
     }
 }

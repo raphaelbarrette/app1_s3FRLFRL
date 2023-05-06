@@ -1,5 +1,6 @@
 package ingredients.instanceIngredient;
 
+import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.EtatIngredient;
 
 //abstract for bridge
@@ -26,11 +27,11 @@ public abstract class Ingredient {
     public double get_Qty(){
         return etatIngredient.get_Qty();
     }
-    public void set_Qty(double qty){
+    public void set_Qty(double qty) {
         etatIngredient.set_Qty(qty);
     }
     public String toString(){
-        return "Ingredient : " + this.getNom() + " Etat :   " + etatIngredient + "\n";
+        return "Ingredient : " + this.getNom() + " Etat: " + etatIngredient + "\n";
     }
     public boolean equals(Object other){
         if (other == this){

@@ -1,3 +1,5 @@
+package menufact;
+
 import ingredients.instanceIngredient.Ingredient;
 import inventaire.Inventaire;
 import menufact.plats.PlatChoisi;

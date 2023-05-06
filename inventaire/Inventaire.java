@@ -1,5 +1,6 @@
 package inventaire;
 
+import ingredients.exceptions.IngredientException;
 import ingredients.factory.*;
 import ingredients.factory.IngredientFactory;
 import ingredients.instanceIngredient.EtatIngredient;
@@ -63,12 +64,12 @@ public class Inventaire {
 
     // finding an ingredient in the ArrayList
     // if no ingredient returns null
-    public void ajouter(TypeIngredient typeIngredient, EtatIngredient etat, String nom, double quantite){
+    public void ajouter(TypeIngredient typeIngredient, EtatIngredient etat, String nom) throws IngredientException {
         groupeIngredient groupeIng= ingredientFactory.getGroupeIngredient(typeIngredient,etat);
         String typeIngredientString= typeIngredient.toString();
         switch(typeIngredientString) {
             case "FRUIT":
-                Ingredient fruit = ConcreteCreatorFruit.creer(groupeIng, nom, quantite);
+                Ingredient fruit = ConcreteCreatorFruit.creer(groupeIng, nom);
                 if (contenant.containsKey(fruit.getNom())) {
                     Ingredient ingred = contenant.get(fruit.getNom());
                     ingred.set_Qty(ingred.get_Qty() + fruit.get_Qty());
@@ -76,8 +77,9 @@ public class Inventaire {
                 } else {
                     contenant.put(fruit.getNom(), fruit);
                 }
+                break;
             case "LEGUME":
-                Ingredient legume = ConcreteCreatorLegume.creer(groupeIng, nom, quantite);
+                Ingredient legume = ConcreteCreatorLegume.creer(groupeIng, nom);
                 if (contenant.containsKey(legume.getNom())) {
                     Ingredient ingred = contenant.get(legume.getNom());
                     ingred.set_Qty(ingred.get_Qty() + legume.get_Qty());
@@ -85,8 +87,9 @@ public class Inventaire {
                 } else {
                     contenant.put(legume.getNom(), legume);
                 }
+                break;
             case "VIANDE":
-                Ingredient viande = ConcreteCreatorViande.creer(groupeIng, nom, quantite);
+                Ingredient viande = ConcreteCreatorViande.creer(groupeIng, nom);
                 if (contenant.containsKey(viande.getNom())) {
                     Ingredient ingred = contenant.get(viande.getNom());
                     ingred.set_Qty(ingred.get_Qty() + viande.get_Qty());
@@ -94,8 +97,9 @@ public class Inventaire {
                 } else {
                     contenant.put(viande.getNom(), viande);
                 }
+                break;
             case "LAITIER":
-                Ingredient laitier = ConcreteCreatorLaitier.creer(groupeIng, nom, quantite);
+                Ingredient laitier = ConcreteCreatorLaitier.creer(groupeIng, nom);
                 if (contenant.containsKey(laitier.getNom())) {
                     Ingredient ingred = contenant.get(laitier.getNom());
                     ingred.set_Qty(ingred.get_Qty() + laitier.get_Qty());
@@ -103,8 +107,9 @@ public class Inventaire {
                 } else {
                     contenant.put(laitier.getNom(), laitier);
                 }
+                break;
             case "EPICE":
-                Ingredient epice = ConcreteCreatorEpice.creer(groupeIng, nom, quantite);
+                Ingredient epice = ConcreteCreatorEpice.creer(groupeIng, nom);
                 if (contenant.containsKey(epice.getNom())) {
                     Ingredient ingred = contenant.get(epice.getNom());
                     ingred.set_Qty(ingred.get_Qty() + epice.get_Qty());
@@ -112,6 +117,7 @@ public class Inventaire {
                 } else {
                     contenant.put(epice.getNom(), epice);
                 }
+                break;
         }
 
     }
@@ -154,6 +160,11 @@ public class Inventaire {
             contenant.clear();
             instance = null;
         }
-
+    }
+    public String toString(){
+        return "Inventaire" + contenant;
+    }
+    public Inventaire returnInstance(){
+        return instance;
     }
 }

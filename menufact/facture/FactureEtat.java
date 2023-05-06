@@ -1,5 +1,5 @@
 package menufact.facture;
 
-public enum FactureEtat {
-    OUVERTE, FERMEE, PAYEE
+public interface FactureEtat {
+    public boolean changerEtat(FactureEtat factureEtat);
 }

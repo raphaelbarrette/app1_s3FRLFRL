@@ -13,10 +13,10 @@ public class Laitier extends Ingredient {
         setEtat(etat);
         set_Qty(qty);
     }
-    public Laitier(groupeIngredient groupeingredient, String nom,double qty){
-        groupeingredient.getEtat().set_Qty(qty);
+    public Laitier(groupeIngredient groupeingredient, String nom){
         this.groupe=groupeingredient;
         this.nom=nom;
+        this.setEtat(groupeingredient.getEtat());
 
     }
 }
