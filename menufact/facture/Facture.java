@@ -63,7 +63,7 @@ public class Facture {
      *
      * @return la valeur de la TPS
      */
-    private double tps(){
+    public double tps(){
         return TPS*sousTotal();
     }
 
@@ -71,7 +71,7 @@ public class Facture {
      *
      * @return la valeur de la TVQ
      */
-    private  double tvq(){
+    public  double tvq(){
         return TVQ*(TPS+1)*sousTotal();
     }
 
@@ -176,6 +176,8 @@ public class Facture {
      *
      * @return une chaîne de caractères avec la facture à imprimer
      */
+
+    /*
     public String genererFacture()
     {
         String lesPlats = new String();
@@ -203,7 +205,23 @@ public class Facture {
 
         return factureGenere;
     }
+    */
+
     public void observer(chef cuisinier){
         chef = cuisinier;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+    public ArrayList<PlatChoisi> getPlatChoisi(){
+        return platchoisi;
+    }
+    public int getCourant(){
+        return courant;
+    }
+
+    public Client getClient(){
+        return client;
     }
 }

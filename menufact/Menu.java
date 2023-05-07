@@ -6,7 +6,7 @@ import menufact.plats.PlatAuMenu;
 import java.util.ArrayList;
 
 public class Menu {
-    private Menu instance = null;
+    private static Menu instance = null;
     private String description;
 
     private int courant;
@@ -15,7 +15,7 @@ public class Menu {
     private Menu(String description) {
         this.description = description;
     }
-    public Menu getInstance(String description){
+    public static Menu getInstance(String description){
         if (instance == null){
             instance = new Menu(description);
         }
