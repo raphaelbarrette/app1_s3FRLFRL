@@ -1,5 +1,6 @@
 package ingredients.instanceIngredient;
 
+import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.EtatIngredient;
 import ingredients.instanceIngredient.Ingredient;
 
@@ -8,7 +9,7 @@ public class Laitier extends Ingredient {
         setNom(nom);
         setEtat(etat);
     }
-    public Laitier(String nom, EtatIngredient etat, double qty) {
+    public Laitier(String nom, EtatIngredient etat, double qty) throws IngredientException {
         setNom(nom);
         setEtat(etat);
         set_Qty(qty);

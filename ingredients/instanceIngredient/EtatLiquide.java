@@ -1,11 +1,12 @@
 package ingredients.instanceIngredient;
 
+import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.EtatIngredient;
 
 public class EtatLiquide implements EtatIngredient {
     private double qtyL;
     private String etat="liquide";
-    public EtatLiquide(double qty){
+    public EtatLiquide(double qty) throws IngredientException {
         set_Qty(qty);
     }
     public double get_Qty(){
@@ -15,8 +16,12 @@ public class EtatLiquide implements EtatIngredient {
         return etat;
     }
 
-    public void set_Qty(double qty){
-        this.qtyL = qty;
+    public void set_Qty(double qty) throws IngredientException {
+        if (qty >= 0) {
+            this.qtyL = qty;
+        } else {
+            throw new IngredientException("quantite negative");
+        }
     }
 
     public String toString(){

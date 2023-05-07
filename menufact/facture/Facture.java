@@ -1,10 +1,13 @@
 package menufact.facture;
 
+import ingredients.exceptions.IngredientException;
 import menufact.Client;
 import menufact.facture.exceptions.FactureException;
 import menufact.plats.PlatChoisi;
 import menufact.chef;
+import menufact.plats.exceptions.PlatException;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -75,21 +78,21 @@ public class Facture {
     /**
      * Permet de chager l'état de la facture à PAYEE
      */
-    public void payer() {
+    public void payer() throws FactureException{
         if (etat.changerEtat(new FactureEtatPayee())){
             etat = new FactureEtatPayee();
         } else {
-            //throw exception
+            throw new FactureException("Facture impossible payer");
         }
     }
     /**
      * Permet de chager l'état de la facture à FERMEE
      */
-    public void fermer() {
+    public void fermer() throws FactureException{
        if (etat.changerEtat(new FactureEtatFermee())){
            etat = new FactureEtatPayee();
        } else {
-           //throw exception
+           throw new FactureException("Facture impossible fermer");
        }
     }
 
@@ -102,7 +105,7 @@ public class Facture {
         if (etat.changerEtat(new FactureEtatOuverte())){
             etat = new FactureEtatOuverte();
         } else {
-            //throw exception
+            throw new FactureException("Facture impossible d'ouvrir");
         }
     }
 
@@ -131,10 +134,23 @@ public class Facture {
      * @param p un plat choisi
      * @throws FactureException Seulement si la facture est OUVERTE
      */
-    public void ajoutePlat(PlatChoisi p) throws FactureException
-    {
+    public void ajoutePlat(PlatChoisi p) throws FactureException, PlatException {
         if (etat instanceof FactureEtatOuverte){
-
+            if (p == null){
+                throw new PlatException("Impossible d'ajouter un plat nul");
+            }
+            if (chef == null){
+                throw new FactureException("Pas de Chef");
+            } else {
+                try {
+                    chef.cuisiner(p);
+                    platchoisi.add(p);
+                } catch (IngredientException ingredientException){
+                    System.out.println("Pas asser d'ingredient" + ingredientException.getMessage());
+                }
+            }
+        } else {
+            throw new FactureException("On peut ajouter des plats qu'a une facture ouverte");
         }
     }
 

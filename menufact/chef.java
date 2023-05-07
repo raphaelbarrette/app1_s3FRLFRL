@@ -1,17 +1,19 @@
 package menufact;
 
+import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.Ingredient;
 import inventaire.Inventaire;
 import menufact.plats.PlatChoisi;
 import menufact.plats.etatPlat.*;
 import inventaire.ingredientPlat;
+import menufact.plats.exceptions.PlatException;
 
 
 public class chef {
-    private chef instance = null;
+    private static chef instance = null;
     private String nom;
     private chef(){}
-    public chef getInstance(){
+    public static chef getInstance(){
         if (instance == null){
             instance = new chef();
         }
@@ -21,14 +23,14 @@ public class chef {
         return nom;
     }
     public void setNom(String nom){
-        if(nom == null) {
+        if(this.nom == null) {
             this.nom = nom;
         }
     }
     public String toString(){
         return "Chef : " + nom + "\n";
     }
-    private void preparer(PlatChoisi platapreparer){
+    private void preparer(PlatChoisi platapreparer) throws IngredientException {
         platapreparer.setEtat(new Preparation());
 
         Inventaire inventaire = Inventaire.getInstance();
@@ -38,7 +40,13 @@ public class chef {
 
     }
 
-    private boolean verifierIngredient(PlatChoisi plat){
+    /**
+     *
+     * @param plat
+     * @return
+     */
+
+    private boolean verifierIngredient(PlatChoisi plat) throws IngredientException{
         Inventaire inventaire = Inventaire.getInstance();
         ingredientPlat recette = plat.getPlat().getRecette();
         for (Ingredient ingredient : recette.getRecette()){
@@ -47,7 +55,7 @@ public class chef {
 
             if (quantiteInventaire < quantiteRecette){
                 plat.setEtat(new ImpossibleServir());
-                return false;
+                throw new IngredientException("Manque Ingredient : " + ingredient.getNom());
             }
 
         }
@@ -61,7 +69,7 @@ public class chef {
         plat.setEtat(new Servi());
         return plat;
     }
-    public PlatChoisi cuisiner(PlatChoisi plat){
+    public PlatChoisi cuisiner(PlatChoisi plat) throws IngredientException, PlatException {
         plat.setEtat(new Commande());
         if(verifierIngredient(plat)){
             preparer(plat);

@@ -1,12 +1,14 @@
 package ingredients.instanceIngredient;
 
+import ingredients.exceptions.IngredientException;
+
 public class Fruit extends Ingredient {
 
     public Fruit(String nom, EtatIngredient etat) {
         setNom(nom);
         setEtat(etat);
     }
-    public Fruit(String nom, EtatIngredient etat, double qty){
+    public Fruit(String nom, EtatIngredient etat, double qty) throws IngredientException {
         setNom(nom);
         setEtat(etat);
         set_Qty(qty);

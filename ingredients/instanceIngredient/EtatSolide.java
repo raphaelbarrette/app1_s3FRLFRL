@@ -1,14 +1,19 @@
 package ingredients.instanceIngredient;
+import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.EtatIngredient;
 
 public class EtatSolide implements EtatIngredient {
     private double qtykg;
     private String etat="Solide";
-    public EtatSolide(double qty){
+    public EtatSolide(double qty) throws IngredientException {
         set_Qty(qty);
     }
-    public void set_Qty(double qty) {
-        qtykg = qty;
+    public void set_Qty(double qty) throws IngredientException {
+        if (qty >= 0) {
+            qtykg = qty;
+        } else {
+            throw new IngredientException("quantite negative");
+        }
     }
     public double get_Qty(){
         return qtykg;

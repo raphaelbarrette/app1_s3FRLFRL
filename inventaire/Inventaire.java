@@ -2,11 +2,7 @@ package inventaire;
 
 import ingredients.exceptions.IngredientException;
 import ingredients.factory.*;
-import ingredients.factory.IngredientFactory;
-import ingredients.instanceIngredient.EtatIngredient;
-import ingredients.instanceIngredient.Ingredient;
-import ingredients.instanceIngredient.TypeIngredient;
-import ingredients.instanceIngredient.groupeIngredient;
+import ingredients.instanceIngredient.*;
 
 import java.util.HashMap;
 //singleton
@@ -17,6 +13,7 @@ public class Inventaire {
 
     private HashMap<String, Ingredient> contenant;
     private IngredientFactory ingredientFactory;
+    private int size = 0;
 
     //private constructor for singleton
 
@@ -42,7 +39,7 @@ public class Inventaire {
      * @param ingredients liste d'objet de classe Ingredient
      */
 
-    public void ajouter(Ingredient[] ingredients){
+    public void ajouter(Ingredient[] ingredients) throws IngredientException {
         for (Ingredient ingredient : ingredients){
             ajouter(ingredient);
         }
@@ -52,14 +49,14 @@ public class Inventaire {
      *
      * @param ingredient objet de la classe Ingredient
      */
-    public void ajouter(Ingredient ingredient)
-    {
+    public void ajouter(Ingredient ingredient) throws IngredientException {
         if (contenant.containsKey(ingredient.getNom())){
             Ingredient i = contenant.get(ingredient.getNom());
             i.set_Qty(i.get_Qty() + ingredient.get_Qty());
             return;
         }
             contenant.put(ingredient.getNom(), ingredient);
+            size++;
     }
 
     // finding an ingredient in the ArrayList
@@ -76,6 +73,7 @@ public class Inventaire {
 
                 } else {
                     contenant.put(fruit.getNom(), fruit);
+                    size++;
                 }
                 break;
             case "LEGUME":
@@ -86,6 +84,7 @@ public class Inventaire {
 
                 } else {
                     contenant.put(legume.getNom(), legume);
+                    size++;
                 }
                 break;
             case "VIANDE":
@@ -96,6 +95,7 @@ public class Inventaire {
 
                 } else {
                     contenant.put(viande.getNom(), viande);
+                    size++;
                 }
                 break;
             case "LAITIER":
@@ -106,6 +106,7 @@ public class Inventaire {
 
                 } else {
                     contenant.put(laitier.getNom(), laitier);
+                    size++;
                 }
                 break;
             case "EPICE":
@@ -116,6 +117,7 @@ public class Inventaire {
 
                 } else {
                     contenant.put(epice.getNom(), epice);
+                    size++;
                 }
                 break;
         }
@@ -131,7 +133,7 @@ public class Inventaire {
     }
     // returns size of ArrayList
     public int getSize(){
-        return contenant.size();
+        return size;
     }
     public double getIngredientQty(Ingredient ingredient){
         if (contenant.get(ingredient.getNom()) != null){
@@ -141,7 +143,7 @@ public class Inventaire {
             return 0;
         }
     }
-    public void consommerRecette(ingredientPlat recette, int quantite, double proportion){
+    public void consommerRecette(ingredientPlat recette, int quantite, double proportion) throws IngredientException {
         for (Ingredient ing : recette.getRecette()){
             Ingredient ingredientContenant = contenant.get(ing.getNom());
 
@@ -149,7 +151,7 @@ public class Inventaire {
             double qtyInventaire = ingredientContenant.get_Qty();
 
             if (qtyInventaire < qtyRecette){
-                //throw exception
+                throw new IngredientException("Pas asser d'ingredient");
             }
             ingredientContenant.set_Qty(qtyInventaire - qtyRecette);
         }
@@ -159,6 +161,7 @@ public class Inventaire {
         if (instance != null){
             contenant.clear();
             instance = null;
+            size = 0;
         }
     }
     public String toString(){

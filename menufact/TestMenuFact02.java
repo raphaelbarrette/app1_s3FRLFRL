@@ -3,13 +3,18 @@ package menufact;
 import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.*;
 import inventaire.Inventaire;
+import inventaire.ingredientPlat;
 import menufact.facture.exceptions.FactureException;
 import menufact.exceptions.MenuException;
 import menufact.facture.Facture;
 import menufact.plats.PlatAuMenu;
 import menufact.plats.PlatChoisi;
 import menufact.plats.PlatSante;
+import menufact.plats.etatPlat.*;
 
+import menufact.plats.etatPlat.Servi;
+import menufact.plats.exceptions.PlatException;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,26 +26,26 @@ class TestIngredient {
     }
 
     @Test
-    void getNom(){
+    void getNom() throws IngredientException {
         EtatIngredient solide = new EtatSolide(10);
         Ingredient i1 = new Viande("boeuf",solide);
         assertEquals("boeuf", i1.getNom());
     }
     @Test
-    void getEtat(){
+    void getEtat() throws IngredientException {
         EtatIngredient solide = new EtatSolide(10);
         EtatIngredient liquide = new EtatLiquide(10);
         Ingredient i1 = new Viande("boeuf",liquide);
         assertEquals(liquide, i1.getEtat());
     }
     @Test
-    void get_Qty(){
+    void get_Qty() throws IngredientException {
         EtatIngredient solide = new EtatSolide(10);
         Ingredient i1 = new Viande("boeuf",solide);
         assertEquals(10, i1.get_Qty());
     }
     @Test
-    void equals(){
+    void equals() throws IngredientException {
         EtatIngredient solide = new EtatSolide(10);
         Ingredient i1 = new Viande("boeuf",solide);
         Ingredient i2 = new Viande("boeuf",solide);
@@ -57,7 +62,7 @@ class InventaireTest {
     void ajouter() throws IngredientException {
         inventaire.ajouter(TypeIngredient.FRUIT, new EtatSolide(10), "Fraise");
         inventaire.ajouter(TypeIngredient.VIANDE, new EtatSolide(5), "Boeuf");
-        System.out.print(inventaire.toString());
+//        System.out.print(inventaire.toString());
     }
     @Test
     void getInstance() throws IngredientException{
@@ -75,8 +80,98 @@ class InventaireTest {
         assertEquals(null, inventaire.returnInstance());
         assertEquals(0, inventaire.getSize());
     }
+    @Test
+    void getIngredient() throws IngredientException{
+        Ingredient i1 = new Fruit("Fraise", new EtatSolide(10));
+        inventaire.ajouter(i1);
+        assertEquals(i1, inventaire.getIngredient(i1));
+    }
+    @Test
+    void getSize() throws IngredientException{
+        inventaire.clearInventaire();
+        Ingredient i1 = new Fruit("Fraise", new EtatSolide(10));
+        Ingredient i2 = new Epice("Curcuma", new EtatSolide(5));
+        inventaire.ajouter(i1);
+        inventaire.ajouter(i2);
+        assertEquals(2, inventaire.getSize());
+    }
+    @Test
+    void getIngredientQty() throws IngredientException{
+        inventaire.clearInventaire();
+        Ingredient i1 = new Fruit("Fraise", new EtatSolide(10));
+        inventaire.ajouter(i1);
+        assertEquals(10, inventaire.getIngredientQty(i1));
+    }
+    @Test
+    void consommerRecette() throws IngredientException{
+        Ingredient i1 = new Fruit("Fraise", new EtatSolide(10));
+        Ingredient i2 = new Laitier("Lait", new EtatLiquide(5));
+        Ingredient i3 = new Viande("Poulet", new EtatSolide(20));
 
+        Ingredient[] liste = {i1, i2, i3};
+        ingredientPlat recette = new ingredientPlat(liste);
+        inventaire.clearInventaire();
+        Ingredient i4 = new Fruit("Fraise", new EtatSolide(15));
+        Ingredient i5 = new Laitier("Lait", new EtatLiquide(10));
+        Ingredient i6 = new Viande("Poulet", new EtatSolide(1));
+        inventaire.ajouter(i5);
+        inventaire.ajouter(i4);
+        inventaire.ajouter(i6);
+        assertThrows(IngredientException.class, () ->{
+            inventaire.consommerRecette(recette, 1, 1);
+        });
+        assertEquals(5, inventaire.getIngredientQty(i4));
+        assertEquals(5, inventaire.getIngredientQty(i5));
+    }
+    @Test
+    void returnInstance(){
+        assertEquals(inventaire, inventaire.returnInstance());
+    }
 }
+
+class chefTest {
+    chef cuisinier = chef.getInstance();
+    @Test
+    void setNomgetNom(){
+        cuisinier.setNom("Kevin");
+        String nom = cuisinier.getNom();
+        assertEquals("Kevin", nom);
+    }
+    @Test
+     void cuisiner() throws IngredientException, PlatException {
+        Ingredient frite = new Legume("frite", new EtatSolide(25));
+        Ingredient fromage = new Laitier("fromage", new EtatSolide(20));
+        Ingredient sauce = new Epice("sauce", new EtatLiquide(1));
+
+        ingredientPlat recettePoutine = new ingredientPlat(new Ingredient[] {frite, fromage, sauce});
+
+        PlatAuMenu poutine = new PlatAuMenu(100, "Poutine", 4.50);
+
+        poutine.setRecette(recettePoutine);
+
+        PlatChoisi platChoisi = new PlatChoisi(poutine, 1);
+
+        Inventaire inventaire = Inventaire.getInstance();
+        inventaire.ajouter(new Ingredient[] {frite, fromage, sauce});
+
+        cuisinier.cuisiner(platChoisi);
+        assertTrue(platChoisi.getEtat() instanceof Servi);
+
+        inventaire.clearInventaire();
+        Ingredient boeuf = new Viande("Boeuf", new EtatSolide(1));
+        PlatAuMenu steak = new PlatAuMenu(20, "steak", 15.00);
+        ingredientPlat recetteSteak = new ingredientPlat(new Ingredient[] {boeuf});
+        steak.setRecette(recetteSteak);
+        PlatChoisi steakChoisi = new PlatChoisi(steak, 5);
+
+        inventaire.ajouter(boeuf);
+        assertThrows(IngredientException.class, () ->{
+            cuisinier.cuisiner(steakChoisi);
+        });
+    }
+}
+
+
 
 
 

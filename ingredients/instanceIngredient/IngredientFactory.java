@@ -1,4 +1,4 @@
-package ingredients.factory;
+package ingredients.instanceIngredient;
 
 import ingredients.instanceIngredient.EtatIngredient;
 import ingredients.instanceIngredient.TypeIngredient;

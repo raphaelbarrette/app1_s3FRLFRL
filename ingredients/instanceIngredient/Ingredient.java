@@ -27,7 +27,7 @@ public abstract class Ingredient {
     public double get_Qty(){
         return etatIngredient.get_Qty();
     }
-    public void set_Qty(double qty) {
+    public void set_Qty(double qty) throws IngredientException {
         etatIngredient.set_Qty(qty);
     }
     public String toString(){

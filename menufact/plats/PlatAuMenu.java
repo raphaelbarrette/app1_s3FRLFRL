@@ -1,5 +1,6 @@
 package menufact.plats;
 import inventaire.ingredientPlat;
+import menufact.plats.exceptions.PlatException;
 
 public class PlatAuMenu {
     private int code;
@@ -7,10 +8,14 @@ public class PlatAuMenu {
     private double prix;
     private ingredientPlat recette;
 
-    public PlatAuMenu(int code, String description, double prix) {
+    public PlatAuMenu(int code, String description, double prix) throws PlatException {
         this.code = code;
         this.description = description;
-        this.prix = prix;
+        if (prix >= 0) {
+            this.prix = prix;
+        } else {
+            throw new PlatException("Impossible : prix negatif");
+        }
     }
 
     public PlatAuMenu() {
