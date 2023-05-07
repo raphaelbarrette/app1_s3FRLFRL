@@ -90,7 +90,7 @@ public class Facture {
      */
     public void fermer() throws FactureException{
        if (etat.changerEtat(new FactureEtatFermee())){
-           etat = new FactureEtatPayee();
+           etat = new FactureEtatFermee();
        } else {
            throw new FactureException("Facture impossible fermer");
        }

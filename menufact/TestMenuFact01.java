@@ -4,6 +4,8 @@
 //import menufact.plats.PlatAuMenu;
 //import menufact.plats.PlatChoisi;
 //import menufact.plats.PlatSante;
+//import menufact.plats.exceptions.PlatException;
+//
 //
 //public class TestMenuFact01 {
 //    public static void main(String[] args) {
@@ -80,7 +82,7 @@
 //            facture.ouvrir();
 //            System.out.println(facture);
 //            System.out.println("Etat = " + facture.getEtat());
-//        }catch (Exception fe)
+//        }catch (Exception | PlatException fe)
 //        {
 //            System.out.println(fe.getMessage());
 //        }
