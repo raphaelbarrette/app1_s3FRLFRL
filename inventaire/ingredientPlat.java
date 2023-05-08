@@ -34,12 +34,15 @@ public class ingredientPlat {
     // adds an ingredient to the ArrayList
     //adds the qty if the ingredient is already in the ArrayList
     public void ajouter(Ingredient ingredient) throws IngredientException {
+        boolean trouver = false;
         for (Ingredient ing : recette){
             if (ing.equals(ingredient)) {
                 ing.set_Qty(ing.get_Qty() + ingredient.get_Qty());
-            } else {
-                recette.add(ingredient);
+                trouver = true;
             }
+        }
+        if (!trouver){
+            recette.add(ingredient);
         }
     }
     public String toString(){

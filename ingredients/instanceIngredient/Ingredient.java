@@ -42,9 +42,9 @@ public abstract class Ingredient {
         }
         return false;
     }
-
-    public void addQty(Ingredient i){
-
+    public groupeIngredient getGroupe(){
+        return groupe;
     }
+
 
 }

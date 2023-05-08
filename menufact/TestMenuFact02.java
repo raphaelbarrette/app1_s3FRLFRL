@@ -12,6 +12,7 @@ import menufact.exceptions.MenuException;
 import menufact.facture.Facture;
 import menufact.plats.*;
 import menufact.plats.etatPlat.*;
+import ingredients.instanceIngredient.TypeIngredient;
 
 import menufact.plats.etatPlat.Servi;
 import menufact.plats.exceptions.PlatException;
@@ -673,18 +674,18 @@ class ingredientPlatTest {
 
     @Test
     public void testAjouter() throws IngredientException {
-        ingredientPlat plat = new ingredientPlat();
+        ingredientPlat recette = new ingredientPlat();
         Ingredient i1 = new Viande("boeuf", new EtatSolide(2));
         Ingredient i2 = new Legume("concombre", new EtatLiquide(2));
         Ingredient i3 = new Laitier("lait", new EtatLiquide(2));
-        plat.ajouter(i1);
-        plat.ajouter(i2);
-        plat.ajouter(i3);
+        recette.ajouter(i1);
+        recette.ajouter(i2);
+        recette.ajouter(i3);
         ArrayList<Ingredient> expected = new ArrayList<>();
         expected.add(i1);
         expected.add(i2);
         expected.add(i3);
-        assertEquals(expected, plat.getRecette());
+        assertEquals(expected, recette.getRecette());
     }
 
     @Test
@@ -701,10 +702,250 @@ class ingredientPlatTest {
 }
 
 
+class EpiceTest {
 
+    @Test
+    public void testConstructor() throws IngredientException {
+        Epice epice = new Epice("paprika", new EtatLiquide(0.2));
+        assertEquals("paprika", epice.getNom());
+        assertTrue(epice.getEtat() instanceof EtatLiquide);
+        assertEquals(0.2, epice.get_Qty(), 0.001);
+    }
 
+    @Test
+    public void testConstructorWithoutQty() throws IngredientException {
+        groupeIngredient groupeIngredient = new groupeIngredient(TypeIngredient.EPICE, new EtatLiquide(0));
+        Epice epice = new Epice(groupeIngredient, "cumin");
+        assertEquals("cumin", epice.getNom());
+        assertEquals(groupeIngredient, epice.getGroupe());
+        assertTrue(epice.getEtat() instanceof EtatLiquide);
+        assertEquals(0.0, epice.get_Qty(), 0.001);
+    }
 
+}
 
+class FruitTest {
+
+    @Test
+    public void testConstructor() throws IngredientException {
+        Fruit fruit = new Fruit("fraise", new EtatLiquide(0.2));
+        assertEquals("fraise", fruit.getNom());
+        assertTrue(fruit.getEtat() instanceof EtatLiquide);
+        assertEquals(0.2, fruit.get_Qty(), 0.001);
+    }
+
+    @Test
+    public void testConstructorWithoutQty() throws IngredientException {
+        groupeIngredient groupeIngredient = new groupeIngredient(TypeIngredient.FRUIT, new EtatLiquide(0));
+        Fruit fruit = new Fruit(groupeIngredient, "fraise");
+        assertEquals("fraise", fruit.getNom());
+        assertEquals(groupeIngredient, fruit.getGroupe());
+        assertTrue(fruit.getEtat() instanceof EtatLiquide);
+        assertEquals(0.0, fruit.get_Qty(), 0.001);
+    }
+
+}
+
+class LaitierTest {
+
+    @Test
+    public void testConstructor() throws IngredientException {
+        Laitier laitier = new Laitier("lait", new EtatLiquide(0.2));
+        assertEquals("lait", laitier.getNom());
+        assertTrue(laitier.getEtat() instanceof EtatLiquide);
+        assertEquals(0.2, laitier.get_Qty(), 0.001);
+    }
+
+    @Test
+    public void testConstructorWithoutQty() throws IngredientException {
+        groupeIngredient groupeIngredient = new groupeIngredient(TypeIngredient.LAITIER, new EtatLiquide(0));
+        Laitier laitier = new Laitier(groupeIngredient, "lait");
+        assertEquals("lait", laitier.getNom());
+        assertEquals(groupeIngredient, laitier.getGroupe());
+        assertTrue(laitier.getEtat() instanceof EtatLiquide);
+        assertEquals(0.0, laitier.get_Qty(), 0.001);
+    }
+
+}
+
+class ViandeTest {
+
+    @Test
+    public void testConstructor() throws IngredientException {
+        Viande viande = new Viande("viande", new EtatLiquide(0.2));
+        assertEquals("viande", viande.getNom());
+        assertTrue(viande.getEtat() instanceof EtatLiquide);
+        assertEquals(0.2, viande.get_Qty(), 0.001);
+    }
+
+    @Test
+    public void testConstructorWithoutQty() throws IngredientException {
+        groupeIngredient groupeIngredient = new groupeIngredient(TypeIngredient.VIANDE, new EtatLiquide(0));
+        Viande viande = new Viande(groupeIngredient, "viande");
+        assertEquals("viande", viande.getNom());
+        assertEquals(groupeIngredient, viande.getGroupe());
+        assertTrue(viande.getEtat() instanceof EtatLiquide);
+        assertEquals(0.0, viande.get_Qty(), 0.001);
+    }
+
+}
+
+class LegumeTest {
+
+    @Test
+    public void testConstructor() throws IngredientException {
+        Legume legume = new Legume("legume", new EtatLiquide(0.2));
+        assertEquals("legume", legume.getNom());
+        assertTrue(legume.getEtat() instanceof EtatLiquide);
+        assertEquals(0.2, legume.get_Qty(), 0.001);
+    }
+
+    @Test
+    public void testConstructorWithoutQty() throws IngredientException {
+        groupeIngredient groupeIngredient = new groupeIngredient(TypeIngredient.LEGUME, new EtatLiquide(0));
+        Legume legume = new Legume(groupeIngredient, "legume");
+        assertEquals("legume", legume.getNom());
+        assertEquals(groupeIngredient, legume.getGroupe());
+        assertTrue(legume.getEtat() instanceof EtatLiquide);
+        assertEquals(0.0, legume.get_Qty(), 0.001);
+    }
+
+}
+
+class EtatSolideTest {
+    @Test
+    public void testConstructorAndGetQty() throws IngredientException {
+        EtatSolide etat = new EtatSolide(1.5);
+        assertEquals(1.5, etat.get_Qty(), 0.0001);
+    }
+
+    @Test
+    public void testSetQty() throws IngredientException {
+        EtatSolide etat = new EtatSolide(1.5);
+        etat.set_Qty(2.0);
+        assertEquals(2.0, etat.get_Qty(), 0.0001);
+    }
+
+    @Test
+    public void testSetQtyWithNegativeValue() {
+        assertThrows(IngredientException.class, () -> {
+            EtatSolide etat = new EtatSolide(1.5);
+            etat.set_Qty(-1.0);
+        });
+    }
+
+    @Test
+    public void testToString() throws IngredientException {
+        EtatSolide etat = new EtatSolide(1.5);
+        assertEquals("Solide, Quantite : 1.5\n", etat.toString());
+    }
+
+    @Test
+    public void testGetEtat() throws IngredientException {
+        EtatSolide etat = new EtatSolide(1.5);
+        assertEquals("Solide", etat.getEtat());
+    }
+
+    @Test
+    public void testEquals() throws IngredientException {
+        EtatSolide etat1 = new EtatSolide(1.5);
+        EtatSolide etat2 = new EtatSolide(1.5);
+        EtatSolide etat3 = new EtatSolide(2.0);
+
+        assertTrue(etat1.equals(etat2));
+        assertFalse(etat1.equals(etat3));
+    }
+
+    @Test
+    public void testAddQty() throws IngredientException {
+        EtatSolide etat1 = new EtatSolide(1.5);
+        EtatSolide etat2 = new EtatSolide(2.0);
+
+        etat1.addQty(etat2);
+        assertEquals(3.5, etat1.get_Qty(), 0.0001);
+    }
+}
+
+class EtatLiquideTest {
+
+    @Test
+    public void testConstructor() throws IngredientException {
+        EtatLiquide e = new EtatLiquide(1.5);
+        assertEquals(1.5, e.get_Qty(), 0.0);
+    }
+
+    @Test
+    public void testConstructorThrowsException() {
+        assertThrows(IngredientException.class, () -> {
+            new EtatLiquide(-1.5);
+        });
+    }
+
+    @Test
+    public void testToString() throws IngredientException {
+        EtatLiquide e = new EtatLiquide(2.0);
+        String expected = "Liquide, Quantite : 2.0\n";
+        assertEquals(expected, e.toString());
+    }
+
+    @Test
+    public void testEquals() throws IngredientException {
+        EtatLiquide e1 = new EtatLiquide(3.0);
+        EtatLiquide e2 = new EtatLiquide(3.0);
+        EtatLiquide e3 = new EtatLiquide(2.0);
+        assertEquals(e1, e2);
+        assertNotEquals(e1, e3);
+    }
+
+    @Test
+    public void testAddQty() throws IngredientException {
+        EtatLiquide e1 = new EtatLiquide(1.5);
+        EtatLiquide e2 = new EtatLiquide(2.5);
+        e1.addQty(e2);
+        assertEquals(4.0, e1.get_Qty(), 0.0);
+    }
+}
+
+class IngredientFactoryTest {
+
+    @Test
+    public void testCreateCompositeKey() {
+        IngredientFactory factory = new IngredientFactory();
+
+        // Test avec un TypeIngredient et un etat valides
+        String expectedKey = "FRUIT-Frais";
+        String actualKey = factory.createCompositeKey(TypeIngredient.FRUIT, "Frais");
+        assertEquals(expectedKey, actualKey);
+
+        // Test avec un TypeIngredient et un etat invalides
+        expectedKey = "FRUIT-Pourrie";
+        actualKey = factory.createCompositeKey(TypeIngredient.FRUIT, "Pourrie");
+        assertEquals(expectedKey, actualKey);
+    }
+
+    @Test
+    void testGetGroupeIngredient() throws IngredientException {
+        IngredientFactory factory = new IngredientFactory();
+
+        // Test avec un TypeIngredient et un EtatIngredient valides
+        TypeIngredient typeIngredient = TypeIngredient.VIANDE;
+        EtatIngredient etatIngredient = new EtatLiquide(10);
+        groupeIngredient expectedGroupe = new groupeIngredient(typeIngredient, etatIngredient);
+        assertEquals(expectedGroupe, factory.getGroupeIngredient(typeIngredient, etatIngredient));
+
+        // Test avec un TypeIngredient invalide et un EtatIngredient valide
+        typeIngredient = TypeIngredient.VIANDE;
+        etatIngredient = new EtatLiquide(10);
+        expectedGroupe = null;
+        assertEquals(expectedGroupe, factory.getGroupeIngredient(typeIngredient, etatIngredient));
+
+        // Test avec un TypeIngredient valide et un EtatIngredient invalide
+        typeIngredient = TypeIngredient.LEGUME;
+        etatIngredient = new EtatSolide(10);
+        expectedGroupe = new groupeIngredient(typeIngredient, etatIngredient);
+        assertEquals(expectedGroupe, factory.getGroupeIngredient(typeIngredient, etatIngredient));
+    }
+}
 
 
 
