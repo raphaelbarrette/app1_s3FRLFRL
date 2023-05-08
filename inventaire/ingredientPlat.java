@@ -8,6 +8,9 @@ import java.util.Arrays;
 public class ingredientPlat {
     // array of ingredients needed for a plate
     private ArrayList<Ingredient> recette;
+    public ingredientPlat(){
+        this.recette = new ArrayList<Ingredient>();
+    }
     // constructor filling the list with a list of ingredients
     public ingredientPlat(Ingredient[] ingredients){
         this.recette = new ArrayList<>(Arrays.asList(ingredients));
@@ -32,10 +35,12 @@ public class ingredientPlat {
     //adds the qty if the ingredient is already in the ArrayList
     public void ajouter(Ingredient ingredient) throws IngredientException {
         for (Ingredient ing : recette){
-            if (ing.equals(ingredient))
+            if (ing.equals(ingredient)) {
                 ing.set_Qty(ing.get_Qty() + ingredient.get_Qty());
+            } else {
+                recette.add(ingredient);
+            }
         }
-        recette.add(ingredient);
     }
     public String toString(){
         return "Recette : " + recette + "\n";

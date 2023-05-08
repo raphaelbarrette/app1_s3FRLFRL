@@ -27,6 +27,20 @@ public class Menu {
         plat.add(p);
     }
 
+    /**
+     *
+     * @return description de menu
+     */
+    public String getDescription(){
+        return this.description;
+    }
+
+    public void setDescription(String description){
+        if (description != null){
+            this.description = description;
+        }
+    }
+
     public void position(int i)
     {
         courant = i;
@@ -52,7 +66,12 @@ public class Menu {
         else
             courant--;
     }
-
+    public double getSize(){
+        return plat.size();
+    }
+    public void clear(){
+        plat.clear();
+    }
 
     @Override
     public String toString() {

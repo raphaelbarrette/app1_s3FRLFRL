@@ -6,6 +6,7 @@ public class PlatEnfant extends PlatAuMenu{
     private double proportion;
 
     public PlatEnfant() {
+        this.proportion = 1.0;
     }
 
     public PlatEnfant(int code, String description, double prix, double proportion) throws PlatException {

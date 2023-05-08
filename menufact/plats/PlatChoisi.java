@@ -2,18 +2,19 @@ package menufact.plats;
 
 import menufact.plats.PlatAuMenu;
 import menufact.plats.etatPlat.CommandeEtat;
+import menufact.plats.exceptions.PlatException;
 
 public class PlatChoisi {
     private PlatAuMenu plat;
     private int quantite;
     private CommandeEtat etat;
 
-    public PlatChoisi(PlatAuMenu plat, int quantite) {
+    public PlatChoisi(PlatAuMenu plat, int quantite) throws PlatException{
         this.plat = plat;
         if (quantite >= 0) {
             this.quantite = quantite;
         } else {
-            //throw exception
+            throw new PlatException("quantite negative");
         }
     }
 
