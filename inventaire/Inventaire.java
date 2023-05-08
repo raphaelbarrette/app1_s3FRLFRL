@@ -170,4 +170,9 @@ public class Inventaire {
     public Inventaire returnInstance(){
         return instance;
     }
+
+
+
+
+
 }

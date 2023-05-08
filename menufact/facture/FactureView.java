@@ -1,6 +1,7 @@
 package menufact.facture;
 
 import menufact.Client;
+import menufact.exceptions.MenuException;
 import menufact.plats.PlatChoisi;
 
 import java.util.ArrayList;
@@ -35,8 +36,11 @@ public class FactureView {
      *
      * @return une chaîne de caractères avec la facture à imprimer
      */
-    public String genererFacture()
+    public String genererFacture() throws MenuException
     {
+        if (!(etat instanceof FactureEtatPayee)){
+            throw new MenuException("Facture non payee");
+        }
         String lesPlats = new String();
         String factureGenere = new String();
 

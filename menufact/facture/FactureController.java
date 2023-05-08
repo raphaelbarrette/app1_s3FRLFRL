@@ -1,6 +1,7 @@
 package menufact.facture;
 
 import menufact.chef;
+import menufact.exceptions.MenuException;
 import menufact.facture.exceptions.FactureException;
 import menufact.plats.PlatChoisi;
 import menufact.plats.exceptions.PlatException;
@@ -76,7 +77,7 @@ public class FactureController {
 
     }
 
-    public String genereFacture(){
+    public String genereFacture() throws MenuException {
         view.setDescription(modele.getDescription());
         view.setEtat(modele.getEtat());
         view.setPlatchoisi(modele.getPlatChoisi());
