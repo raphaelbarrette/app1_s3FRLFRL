@@ -72,7 +72,7 @@ public class Facture {
      * @return la valeur de la TVQ
      */
     public  double tvq(){
-        return TVQ*(TPS+1)*sousTotal();
+        return TVQ*sousTotal();
     }
 
     /**
@@ -223,5 +223,12 @@ public class Facture {
 
     public Client getClient(){
         return client;
+    }
+
+    public chef getChef(){
+        return chef;
+    }
+    public ArrayList<PlatChoisi> getPlatsChoisis(){
+        return platchoisi;
     }
 }
