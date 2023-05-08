@@ -4,11 +4,15 @@ import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.*;
 import inventaire.Inventaire;
 import inventaire.ingredientPlat;
+import menufact.facture.FactureEtatFermee;
+import menufact.facture.FactureEtatOuverte;
+import menufact.facture.FactureEtatPayee;
 import menufact.facture.exceptions.FactureException;
 import menufact.exceptions.MenuException;
 import menufact.facture.Facture;
 import menufact.plats.PlatAuMenu;
 import menufact.plats.PlatChoisi;
+import menufact.plats.PlatEnfant;
 import menufact.plats.PlatSante;
 import menufact.plats.etatPlat.*;
 
@@ -17,6 +21,8 @@ import menufact.plats.exceptions.PlatException;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestIngredient {
@@ -170,6 +176,67 @@ class chefTest {
         });
     }
 }
+
+class FactureTest {
+    Client client = new Client(10, "Kevin", "27");
+    Facture facture = new Facture("Facture 1");
+    @Test
+    void ouvrir() throws FactureException{
+        assertThrows(FactureException.class, ()->{
+            facture.ouvrir();
+        });
+    }
+    @Test
+    void fermee_getEtat() throws FactureException {
+        facture.fermer();
+        assertTrue(facture.getEtat() instanceof FactureEtatFermee);
+    }
+    @Test
+    void paye_getEtat() throws FactureException{
+        facture.payer();
+        assertTrue(facture.getEtat() instanceof FactureEtatPayee);
+    }
+    //@Test
+
+}
+
+class PlatEnfantTest {
+    @Test
+    void setProportion_getProportion() throws PlatException{
+        PlatEnfant platEnfant = new PlatEnfant(10, "plat enfant", 2.0, 0.5);
+        double proportion = platEnfant.getProportion();
+        assertEquals(0.5, proportion);
+        platEnfant.setProportion(1.0);
+        proportion = platEnfant.getProportion();
+        assertEquals(1.0, proportion);
+    }
+}
+
+class PlatSanteTest {
+    @Test
+    void getKcal_setKcal() throws PlatException{
+        PlatSante platSante = new PlatSante();
+        double Kcal = 1.0;
+        platSante.setKcal(Kcal);
+        assertEquals(Kcal, platSante.getKcal());
+    }
+    @Test
+    void getChol_setChol() throws PlatException{
+        PlatSante platSante = new PlatSante();
+        double Chol = 2.0;
+        platSante.setChol(Chol);
+        assertEquals(Chol, platSante.getChol());
+    }
+    @Test
+    void getGras_setGras() throws PlatException{
+        PlatSante platSante = new PlatSante();
+        double Gras = 3.0;
+        platSante.setGras(Gras);
+        assertEquals(Gras, platSante.getGras());
+    }
+}
+
+
 
 
 
