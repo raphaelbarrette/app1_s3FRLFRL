@@ -5,4 +5,8 @@ public class FactureEtatPayee implements FactureEtat{
     public boolean changerEtat(FactureEtat factureEtat) {
         return false;
     }
+
+    public String toString(){
+        return "Facture etat payee";
+    }
 }

@@ -5,4 +5,7 @@ public class FactureEtatFermee implements FactureEtat{
         return factureEtat instanceof FactureEtatPayee || factureEtat instanceof FactureEtatOuverte;
     }
 
+    public String toString(){
+        return "Facture etat fermee";
+    }
 }
