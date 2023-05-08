@@ -24,7 +24,9 @@ public class Client {
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        if (nom != null) {
+            this.nom = nom;
+        }
     }
 
     public String getNumeroCarteCredit() {
@@ -32,7 +34,9 @@ public class Client {
     }
 
     public void setNumeroCarteCredit(String numeroCarteCredit) {
-        this.numeroCarteCredit = numeroCarteCredit;
+        if (numeroCarteCredit != null) {
+            this.numeroCarteCredit = numeroCarteCredit;
+        }
     }
 
     @Override

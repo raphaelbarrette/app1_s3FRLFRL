@@ -10,10 +10,7 @@ import menufact.facture.FactureEtatPayee;
 import menufact.facture.exceptions.FactureException;
 import menufact.exceptions.MenuException;
 import menufact.facture.Facture;
-import menufact.plats.PlatAuMenu;
-import menufact.plats.PlatChoisi;
-import menufact.plats.PlatEnfant;
-import menufact.plats.PlatSante;
+import menufact.plats.*;
 import menufact.plats.etatPlat.*;
 
 import menufact.plats.etatPlat.Servi;
@@ -22,6 +19,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestTemplate;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -235,6 +234,479 @@ class PlatSanteTest {
         assertEquals(Gras, platSante.getGras());
     }
 }
+
+class PlatChoisiTest {
+    @Test
+    public void testConstructeurAvecQuantitePositive() throws PlatException{
+        PlatAuMenu plat = new PlatAuMenu(1, "Poulet", 10.99);
+        PlatChoisi platChoisi = new PlatChoisi(plat, 2);
+        assertEquals(plat, platChoisi.getPlat());
+        assertEquals(2, platChoisi.getQuantite());
+    }
+
+    @Test
+    public void testConstructeurAvecQuantiteNegative() throws PlatException{
+        PlatAuMenu plat = new PlatAuMenu(1, "Poulet", 10.99);
+        assertThrows(PlatException.class, () -> new PlatChoisi(plat, -2));
+    }
+
+    @Test
+    public void testToString() throws PlatException{
+        PlatAuMenu plat = new PlatAuMenu(1, "Poulet", 10.99);
+        PlatChoisi platChoisi = new PlatChoisi(plat, 2);
+        String expectedString = "menufact.plats.PlatChoisi{quantite=2, plat=" + plat.toString() + "}";
+        assertEquals(expectedString, platChoisi.toString());
+    }
+
+    @Test
+    public void testGetQuantite() throws PlatException{
+        PlatAuMenu plat = new PlatAuMenu(1, "Poulet", 10.99);
+        PlatChoisi platChoisi = new PlatChoisi(plat, 2);
+        assertEquals(2, platChoisi.getQuantite());
+    }
+
+    @Test
+    public void testGetPlat() throws PlatException{
+        PlatAuMenu plat = new PlatAuMenu(1, "Poulet", 10.99);
+        PlatChoisi platChoisi = new PlatChoisi(plat, 2);
+        assertEquals(plat, platChoisi.getPlat());
+    }
+
+    @Test
+    public void testPlatChoisiGetQuantite() throws PlatException {
+        PlatAuMenu plat = new PlatAuMenu(1, "Plat test", 10.0);
+        PlatChoisi platChoisi = new PlatChoisi(plat, 2);
+
+        assertEquals(2, platChoisi.getQuantite());
+    }
+
+    @Test
+    public void testPlatChoisiSetQuantite() throws PlatException {
+        PlatAuMenu plat = new PlatAuMenu(1, "Plat test", 10.0);
+        PlatChoisi platChoisi = new PlatChoisi(plat, 2);
+
+        platChoisi.setQuantite(3);
+
+        assertEquals(3, platChoisi.getQuantite());
+    }
+
+    @Test
+    public void testPlatChoisiGetPlat() throws PlatException {
+        PlatAuMenu plat = new PlatAuMenu(1, "Plat test", 10.0);
+        PlatChoisi platChoisi = new PlatChoisi(plat, 2);
+        assertEquals(plat, platChoisi.getPlat());
+    }
+
+    @Test
+    public void testPlatChoisiGetEtat() throws PlatException {
+        PlatAuMenu plat = new PlatAuMenu(1, "Plat test", 10.0);
+        PlatChoisi platChoisi = new PlatChoisi(plat, 2);
+
+        assertNull(platChoisi.getEtat());
+    }
+
+    @Test
+    public void testPlatChoisiSetEtatValide() throws PlatException {
+        PlatAuMenu plat = new PlatAuMenu(1, "Plat test", 10.0);
+        PlatChoisi platChoisi = new PlatChoisi(plat, 2);
+
+        CommandeEtat nouvelEtat = new Preparation();
+        platChoisi.setEtat(nouvelEtat);
+
+        assertEquals(nouvelEtat, platChoisi.getEtat());
+    }
+}
+
+class PlatAuMenuTest {
+    private PlatAuMenu plat;
+
+    @BeforeEach
+    public void setUp() throws PlatException {
+        plat = new PlatAuMenu(1, "Poutine", 8.99);
+    }
+
+    @Test
+    public void testGetCode() {
+        assertEquals(1, plat.getCode());
+    }
+
+    @Test
+    public void testSetCode() {
+        plat.setCode(2);
+        assertEquals(2, plat.getCode());
+    }
+
+    @Test
+    public void testGetDescription() {
+        assertEquals("Poutine", plat.getDescription());
+    }
+
+    @Test
+    public void testSetDescription() {
+        plat.setDescription("Poutine au foie gras");
+        assertEquals("Poutine au foie gras", plat.getDescription());
+    }
+
+    @Test
+    public void testGetPrix() {
+        assertEquals(8.99, plat.getPrix());
+    }
+
+    @Test
+    public void testSetPrix() {
+        plat.setPrix(9.99);
+        assertEquals(9.99, plat.getPrix());
+    }
+
+    @Test
+    public void testSetRecette() throws IngredientException {
+        Ingredient i1 = new Legume("Pommes de terre", new EtatSolide(10));
+        Ingredient i2 = new Laitier("Fromage en grains", new EtatSolide(5));
+        Inventaire inventaire = Inventaire.getInstance();
+        try {
+            inventaire.ajouter(i1);
+            inventaire.ajouter(i2);
+        } catch (IngredientException e) {
+            e.printStackTrace();
+        }
+        ingredientPlat recette = new ingredientPlat();
+        try {
+            recette.ajouter(i1);
+            recette.ajouter(i2);
+        } catch (IngredientException e) {
+            e.printStackTrace();
+        }
+        plat.setRecette(recette);
+        assertEquals(recette, plat.getRecette());
+    }
+
+    @Test
+    public void testPrixNegatif() {
+        PlatException exception = assertThrows(PlatException.class, () -> {
+            PlatAuMenu plat = new PlatAuMenu(1, "Poutine", -8.99);
+        });
+        assertEquals("PlatException : Impossible : prix negatif", exception.getMessage());
+    }
+
+    @Test
+    public void testProportion() {
+        assertEquals(1.0, plat.getProportion());
+    }
+}
+
+class BuilderPlatTest {
+
+    @Test
+    public void testBuildDescription() {
+        BuilderPlat builder = new BuilderPlat();
+        String description = "Plat de pâtes à la sauce tomate";
+        builder.build_description(description);
+        PlatAuMenu plat = builder.getPlat();
+
+        assertEquals(description, plat.getDescription());
+    }
+
+    @Test
+    public void testBuildDescriptionEmpty() {
+        BuilderPlat builder = new BuilderPlat();
+        String description = "";
+        builder.build_description(description);
+        PlatAuMenu plat = builder.getPlat();
+
+        assertEquals(description, plat.getDescription());
+    }
+
+    @Test
+    public void testBuildDescriptionNull() {
+        BuilderPlat builder = new BuilderPlat();
+        String description = null;
+        builder.build_description(description);
+        PlatAuMenu plat = builder.getPlat();
+
+        assertNull(plat.getDescription());
+    }
+}
+
+class BuilderPlatEnfantTest {
+    @Test
+    public void testBuildProportion() {
+        BuilderPlatEnfant builder = new BuilderPlatEnfant();
+        double proportion = 0.5;
+        builder.build_proportion(proportion);
+        PlatEnfant plat = builder.getPlat();
+        assertEquals(proportion, plat.getProportion(), 0.001);
+    }
+
+    @Test
+    public void testClear() throws IngredientException {
+        BuilderPlatEnfant builder = new BuilderPlatEnfant();
+        builder.build_description("test plat");
+        builder.build_prix(10.0);
+        Ingredient ingredient = new Viande("test", new EtatSolide(5));
+        ingredientPlat recette = new ingredientPlat(new Ingredient[] {ingredient});
+        builder.build_recette(recette);
+        builder.build_proportion(0.5);
+
+        builder.clear();
+
+        PlatEnfant plat = builder.getPlat();
+        assertNull(plat.getDescription());
+        assertEquals(0.0, plat.getPrix(), 0.001);
+        assertNull(plat.getRecette());
+        assertEquals(1.0, plat.getProportion(), 0.001);
+    }
+}
+
+class BuilderPlatSanteTest {
+
+    @Test
+    public void testBuild_kcal() {
+        BuilderPlatSante builder = new BuilderPlatSante();
+        double kcal = 500;
+
+        builder.build_kcal(kcal);
+        PlatSante platSante = builder.getPlat();
+
+        assertEquals(kcal, platSante.getKcal(), 0.001);
+    }
+
+    @Test
+    public void testBuild_chol() {
+        BuilderPlatSante builder = new BuilderPlatSante();
+        double chol = 50;
+
+        builder.build_chol(chol);
+        PlatSante platSante = builder.getPlat();
+
+        assertEquals(chol, platSante.getChol(), 0.001);
+    }
+
+    @Test
+    public void testBuild_gras() {
+        BuilderPlatSante builder = new BuilderPlatSante();
+        double gras = 20;
+
+        builder.build_gras(gras);
+        PlatSante platSante = builder.getPlat();
+
+        assertEquals(gras, platSante.getGras(), 0.001);
+    }
+
+}
+
+class MenuTest {
+
+    @Test
+    public void testGetInstance() {
+        Menu m1 = Menu.getInstance("Menu1");
+        Menu m2 = Menu.getInstance("Menu2");
+        assertEquals(m1, m2); // should return true since getInstance() returns the same instance
+    }
+
+    @Test
+    public void testAjoute() throws PlatException {
+        Menu m = Menu.getInstance("Menu");
+        m.clear();
+        PlatAuMenu p1 = new PlatAuMenu(10, "P1", 20);
+        PlatAuMenu p2 = new PlatAuMenu(10, "P2", 20);
+        m.ajoute(p1);
+        m.ajoute(p2);
+        assertEquals(2, m.getSize()); // should return true since there are 2 plats in the menu
+    }
+
+    @Test
+    public void testGetDescription() {
+        Menu m = Menu.getInstance("Menu");
+        m.setDescription("Menu");
+        assertEquals("Menu", m.getDescription()); // should return true since description was set to "Menu"
+    }
+
+    @Test
+    public void testSetDescription() {
+        Menu m = Menu.getInstance("Menu");
+        m.setDescription("New Menu");
+        assertEquals("New Menu", m.getDescription()); // should return true since description was updated to "New Menu"
+    }
+
+    @Test
+    public void testPlatCourant() throws PlatException {
+        Menu m = Menu.getInstance("Menu");
+        PlatAuMenu p1 = new PlatAuMenu(10, "P1", 10);
+        PlatAuMenu p2 = new PlatAuMenu(10, "P2", 20);
+        m.ajoute(p1);
+        m.ajoute(p2);
+        m.position(1);
+        assertEquals(p2.toString(), m.platCourant().toString()); // should return true since platCourant() should return the second plat added to the menu
+    }
+
+    @Test
+    public void testPositionSuivante() throws MenuException, PlatException {
+        Menu m = Menu.getInstance("Menu");
+        PlatAuMenu p1 = new PlatAuMenu(10, "P1", 10);
+        PlatAuMenu p2 = new PlatAuMenu(10, "P2", 20);
+        m.ajoute(p1);
+        m.ajoute(p2);
+        m.positionSuivante();
+        assertEquals(p2, m.platCourant()); // should return true since platCourant() should return the second plat added to the menu after calling positionSuivante()
+    }
+
+    @Test
+    public void testPositionSuivanteException() throws MenuException, PlatException {
+        Menu m = Menu.getInstance("Menu");
+        m.clear();
+        PlatAuMenu p1 = new PlatAuMenu(10, "P1", 10);
+        m.ajoute(p1);
+        assertThrows(MenuException.class, ()->{
+            m.positionSuivante(); // should throw a MenuException since there is only one plat in the menu
+        });
+    }
+
+    @Test
+    public void testPositionPrecedente() throws MenuException, PlatException {
+        Menu m = Menu.getInstance("Menu");
+        PlatAuMenu p1 = new PlatAuMenu(10, "P1", 10);
+        PlatAuMenu p2 = new PlatAuMenu(10, "P2", 20);
+        m.ajoute(p1);
+        m.ajoute(p2);
+        m.position(1);
+        m.positionPrecedente();
+        assertEquals(p1, m.platCourant()); // should return true since platCourant() should return the first plat added to the menu after calling positionPrecedente()
+    }
+
+    @Test
+    public void testClear() throws PlatException {
+        Menu m = Menu.getInstance("Menu");
+        PlatAuMenu p1 = new PlatAuMenu(10, "P1", 10);
+        m.ajoute(p1);
+        m.clear();
+        assertEquals(0, m.getSize());
+    }
+    @Test
+    public void testgetSize() throws PlatException {
+        Menu m = Menu.getInstance("Menu");
+        m.clear();
+        PlatAuMenu p1 = new PlatAuMenu(10, "P1", 10);
+        m.ajoute(p1);
+        assertEquals(1, m.getSize());
+    }
+}
+
+class ClientTest {
+
+    @Test
+    public void testGetIdClient() {
+        Client client = new Client(1, "John Doe", "1234-5678-9012-3456");
+        assertEquals(1, client.getIdClient());
+    }
+
+    @Test
+    public void testSetIdClient() {
+        Client client = new Client(1, "John Doe", "1234-5678-9012-3456");
+        client.setIdClient(2);
+        assertEquals(2, client.getIdClient());
+    }
+
+    @Test
+    public void testGetNom() {
+        Client client = new Client(1, "John Doe", "1234-5678-9012-3456");
+        assertEquals("John Doe", client.getNom());
+    }
+
+    @Test
+    public void testSetNom() {
+        Client client = new Client(1, "John Doe", "1234-5678-9012-3456");
+        client.setNom("Jane Doe");
+        assertEquals("Jane Doe", client.getNom());
+    }
+
+    @Test
+    public void testGetNumeroCarteCredit() {
+        Client client = new Client(1, "John Doe", "1234-5678-9012-3456");
+        assertEquals("1234-5678-9012-3456", client.getNumeroCarteCredit());
+    }
+
+    @Test
+    public void testSetNumeroCarteCredit() {
+        Client client = new Client(1, "John Doe", "1234-5678-9012-3456");
+        client.setNumeroCarteCredit("5555-5555-5555-5555");
+        assertEquals("5555-5555-5555-5555", client.getNumeroCarteCredit());
+    }
+
+    @Test
+    public void testSetNomNull() {
+        Client client = new Client(1, "John Doe", "1234-5678-9012-3456");
+        client.setNom(null);
+        assertEquals("John Doe", client.getNom());
+    }
+
+    @Test
+    public void testSetNumeroCarteCreditNull() {
+        Client client = new Client(1, "John Doe", "1234-5678-9012-3456");
+        client.setNumeroCarteCredit(null);
+        assertEquals("1234-5678-9012-3456", client.getNumeroCarteCredit());
+    }
+}
+
+class ingredientPlatTest {
+    @Test
+    public void testConstructor1() throws IngredientException {
+        Ingredient i1 = new Viande("boeuf", new EtatSolide(2));
+        Ingredient i2 = new Legume("concombre", new EtatLiquide(2));
+        Ingredient[] ingredients = {i1, i2};
+        ingredientPlat plat = new ingredientPlat(ingredients);
+        ArrayList<Ingredient> expected = new ArrayList<>();
+        expected.add(i1);
+        expected.add(i2);
+        assertEquals(expected, plat.getRecette());
+    }
+
+    @Test
+    public void testConstructor2() throws IngredientException {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        Ingredient i1 = new Viande("boeuf", new EtatSolide(2));
+        Ingredient i2 = new Legume("concombre", new EtatLiquide(2));
+        ingredients.add(i1);
+        ingredients.add(i2);
+        ingredientPlat plat = new ingredientPlat(ingredients);
+        assertEquals(ingredients, plat.getRecette());
+    }
+
+    @Test
+    public void testAjouter() throws IngredientException {
+        ingredientPlat plat = new ingredientPlat();
+        Ingredient i1 = new Viande("boeuf", new EtatSolide(2));
+        Ingredient i2 = new Legume("concombre", new EtatLiquide(2));
+        Ingredient i3 = new Laitier("lait", new EtatLiquide(2));
+        plat.ajouter(i1);
+        plat.ajouter(i2);
+        plat.ajouter(i3);
+        ArrayList<Ingredient> expected = new ArrayList<>();
+        expected.add(i1);
+        expected.add(i2);
+        expected.add(i3);
+        assertEquals(expected, plat.getRecette());
+    }
+
+    @Test
+    public void testSetRecette() throws IngredientException {
+        ingredientPlat plat = new ingredientPlat();
+        Ingredient i1 = new Viande("boeuf", new EtatSolide(2));
+        Ingredient i2 = new Legume("concombre", new EtatLiquide(2));
+        plat.setRecette(new Ingredient[]{i1, i2});
+        ArrayList<Ingredient> expected = new ArrayList<>();
+        expected.add(i1);
+        expected.add(i2);
+        assertEquals(expected, plat.getRecette());
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
