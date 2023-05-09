@@ -9,7 +9,7 @@ import ingredients.instanceIngredient.Ingredient;
  */
 public class Viande extends Ingredient {
     /**
-     *
+     * constructeur de Viande avec le nom et l'etat
      * @param nom de la Viande
      * @param etat de la Viande
      */
@@ -19,7 +19,7 @@ public class Viande extends Ingredient {
     }
 
     /**
-     *
+     * constructeur de Viande avec le nom, l'etat et la quantite
      * @param nom de la Viande
      * @param etat de la Viande
      * @param qty de la Viande
@@ -32,7 +32,7 @@ public class Viande extends Ingredient {
     }
 
     /**
-     *
+     * constructeur de Viande avec le groupeingredient et le nom
      * @param groupeingredient de la Viande
      * @param nom de la Viande
      */

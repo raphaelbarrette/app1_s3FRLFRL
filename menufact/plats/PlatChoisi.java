@@ -13,7 +13,7 @@ public class PlatChoisi {
     private CommandeEtat etat;
 
     /**
-     *
+     * constructeur de PlatChoisi avec plat et quantite
      * @param plat a mettre comme plat choisi
      * @param quantite quantite du plat a ajouter
      * @throws PlatException
@@ -28,7 +28,7 @@ public class PlatChoisi {
     }
 
     /**
-     *
+     * retourne String du PlatChoisi
      * @return String a afficher
      */
     @Override
@@ -40,7 +40,7 @@ public class PlatChoisi {
     }
 
     /**
-     *
+     * retourne la quantite du PlatChoisi
      * @return quantite du plat
      */
     public int getQuantite() {
@@ -48,7 +48,7 @@ public class PlatChoisi {
     }
 
     /**
-     *
+     * set la quantite du PlatChoisi
      * @param quantite du plat a set
      */
     public void setQuantite(int quantite) {
@@ -56,7 +56,7 @@ public class PlatChoisi {
     }
 
     /**
-     *
+     * retourne le PlatChoisi
      * @return plat
      */
     public PlatAuMenu getPlat() {
@@ -64,7 +64,7 @@ public class PlatChoisi {
     }
 
     /**
-     *
+     * retourne l'etat du PlatChoisi
      * @return etat du plat
      */
     public CommandeEtat getEtat(){
@@ -72,7 +72,7 @@ public class PlatChoisi {
     }
     //changes the state in the parameter is the logical next one
     /**
-     *
+     * set l'etat du PlatChoisi
      * @param etat2 state to change to
      */
     public void setEtat(CommandeEtat etat2){

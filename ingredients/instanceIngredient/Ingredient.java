@@ -11,10 +11,13 @@ public abstract class Ingredient {
     protected EtatIngredient etatIngredient;
     protected groupeIngredient groupe;
 
+    /**
+     * constructeur d'ingredient
+     */
     public Ingredient(){}
 
     /**
-     *
+     * retourne le nom de l'ingredient
      * @return nom de l'ingredient
      */
     public String getNom() {
@@ -22,7 +25,7 @@ public abstract class Ingredient {
     }
 
     /**
-     *
+     * set le nom de l'ingredient
      * @param nom de l'ingredient
      */
     public void setNom(String nom) {
@@ -30,7 +33,7 @@ public abstract class Ingredient {
     }
 
     /**
-     *
+     * retourne l'etat de l'ingredient
      * @return etat de l'ingredient
      */
     public EtatIngredient getEtat(){
@@ -38,7 +41,7 @@ public abstract class Ingredient {
     }
 
     /**
-     *
+     * set l'etat de l'ingredient
      * @param etatIngredient etat de l'ingredient
      */
     public void setEtat(EtatIngredient etatIngredient){
@@ -46,7 +49,7 @@ public abstract class Ingredient {
     }
 
     /**
-     *
+     * retourne la quantite de l'ingredient
      * @return qunatite de l'ingredient
      */
     public double get_Qty(){
@@ -54,7 +57,7 @@ public abstract class Ingredient {
     }
 
     /**
-     *
+     * set la quantite de l'ingredient
      * @param qty quantite de l'ingredient
      * @throws IngredientException
      */
@@ -63,7 +66,7 @@ public abstract class Ingredient {
     }
 
     /**
-     *
+     * retourne String de l'ingredient
      * @return String a afficher
      */
     public String toString(){
@@ -71,7 +74,7 @@ public abstract class Ingredient {
     }
 
     /**
-     *
+     * verifie si un object Ingredient est egal a un autre
      * @param other ingredient a comparer
      * @return true si egal, faux sinon
      */
@@ -86,7 +89,7 @@ public abstract class Ingredient {
     }
 
     /**
-     *
+     * retourn le groupe de l'ingredient
      * @return groupe de l'ingredient
      */
     public groupeIngredient getGroupe(){

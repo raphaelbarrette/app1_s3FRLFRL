@@ -31,7 +31,7 @@ public class Facture {
     private final double TVQ = 0.095;
 
     /**
-     *
+     * associe un object client a la facture
      * @param client le client de la facture
      */
     public void associerClient (Client client)
@@ -52,7 +52,7 @@ public class Facture {
     }
 
     /**
-     *
+     * retourne le total de la facture
      * @return le total de la facture
      */
     public double total(){
@@ -60,7 +60,7 @@ public class Facture {
     }
 
     /**
-     *
+     * retourne la valuer du tps de la facture
      * @return la valeur de la TPS
      */
     public double tps(){
@@ -68,7 +68,7 @@ public class Facture {
     }
 
     /**
-     *
+     * retourne la valeur tvq de la facture
      * @return la valeur de la TVQ
      */
     public  double tvq(){
@@ -110,7 +110,7 @@ public class Facture {
     }
 
     /**
-     *
+     * retourne l'etat de la facture
      * @return l'état de la facture
      */
     public FactureEtat getEtat()
@@ -119,7 +119,7 @@ public class Facture {
     }
 
     /**
-     *
+     * createur de la facture avec la description
      * @param description la description de la Facture
      */
     public Facture(String description) {
@@ -130,7 +130,7 @@ public class Facture {
     }
 
     /**
-     *
+     * ajoute un plat a la facture apres l'avoir cuisiner
      * @param p un plat choisi
      * @throws FactureException Seulement si la facture est OUVERTE
      */
@@ -155,7 +155,7 @@ public class Facture {
     }
 
     /**
-     *
+     * retourne String de la facture
      * @return le contenu de la facture en chaîne de caracteres
      */
     @Override
@@ -208,7 +208,7 @@ public class Facture {
     */
 
     /**
-     *
+     * associe un object chef a la facture
      * @param cuisinier object class chef a associer
      */
     public void observer(chef cuisinier){
@@ -216,7 +216,7 @@ public class Facture {
     }
 
     /**
-     *
+     * retourne la description de la facture
      * @return description Facture
      */
     public String getDescription(){
@@ -224,7 +224,7 @@ public class Facture {
     }
 
     /**
-     *
+     * retourne le courant de la facture
      * @return courant de la facture
      */
     public int getCourant(){
@@ -232,7 +232,7 @@ public class Facture {
     }
 
     /**
-     *
+     * retourne le client de la facture
      * @return client associer a la facture
      */
     public Client getClient(){
@@ -240,7 +240,7 @@ public class Facture {
     }
 
     /**
-     *
+     * retourne le chef de la facture
      * @return chef associer a la facture
      */
     public chef getChef(){
@@ -248,13 +248,17 @@ public class Facture {
     }
 
     /**
-     *
+     * retourne l'ArrayList de PlatChoisi
      * @return ArrayList de PlatChoisi
      */
     public ArrayList<PlatChoisi> getPlatsChoisis(){
         return platchoisi;
     }
 
+    /**
+     * retourne date de la facture
+     * @return date de la facture
+     */
     public Date getDate(){
         return this.date;
     }

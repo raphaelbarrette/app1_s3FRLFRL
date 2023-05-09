@@ -13,7 +13,7 @@ public class BuilderPlatSante extends BuilderPlat{
     }
 
     /**
-     *
+     * set le kcal du plat sante
      * @param kcal du plat a build
      */
     public void build_kcal(double kcal){
@@ -21,7 +21,7 @@ public class BuilderPlatSante extends BuilderPlat{
     }
 
     /**
-     *
+     * set le chol du plat sante
      * @param chol du plat a build
      */
     public void build_chol(double chol){
@@ -29,7 +29,7 @@ public class BuilderPlatSante extends BuilderPlat{
     }
 
     /**
-     *
+     * set le gras d'un plat sante
      * @param gras du plat a build
      */
     public void build_gras(double gras){
@@ -44,7 +44,7 @@ public class BuilderPlatSante extends BuilderPlat{
     }
 
     /**
-     *
+     * retourne le plat sante
      * @return plat sante
      */
     public PlatSante getPlat(){

@@ -5,7 +5,7 @@ package menufact.facture;
  */
 public class FactureEtatFermee implements FactureEtat{
     /**
-     *
+     * verifie s'il est possible de passer de l'etat fermer un autre
      * @param factureEtat etat a lequelle changer
      * @return true si changement possible, false sinon
      */
@@ -14,7 +14,7 @@ public class FactureEtatFermee implements FactureEtat{
     }
 
     /**
-     *
+     * retourne string de l'etat fermer
      * @return String afficher
      */
     public String toString(){

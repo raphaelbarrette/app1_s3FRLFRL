@@ -16,7 +16,7 @@ public class PlatEnfant extends PlatAuMenu{
     }
 
     /**
-     *
+     * constructeur de PlatEnfant avec le code , description , le prix et la proportion
      * @param code du plat enfant
      * @param description du plat enfant
      * @param prix du plat enfant
@@ -29,7 +29,7 @@ public class PlatEnfant extends PlatAuMenu{
     }
 
     /**
-     *
+     * retourne la proportion du PlatEnfant
      * @return proportion du plat
      */
     public double getProportion() {
@@ -37,7 +37,7 @@ public class PlatEnfant extends PlatAuMenu{
     }
 
     /**
-     *
+     * set la Proportion du PlatEnfant
      * @param proportion du plat a set
      */
     public void setProportion(double proportion){
@@ -45,7 +45,7 @@ public class PlatEnfant extends PlatAuMenu{
     }
 
     /**
-     *
+     * retourne String du PlatEnfant
      * @return String a afficher
      */
     @Override

@@ -16,7 +16,7 @@ public class Menu {
     private ArrayList<PlatAuMenu> plat = new ArrayList<PlatAuMenu>();
 
     /**\
-     * private constructor pour singleton
+     * private constructor pour singleton avec la description
      * @param description du menu
      */
     private Menu(String description) {
@@ -36,7 +36,7 @@ public class Menu {
     }
 
     /**
-     *
+     * ajoute un plat au menu
      * @param p plat a ajouter
      * @throws PlatException si plat est null
      */
@@ -49,7 +49,7 @@ public class Menu {
     }
 
     /**
-     *
+     * retourne la description du menu
      * @return description de menu
      */
     public String getDescription(){
@@ -57,7 +57,7 @@ public class Menu {
     }
 
     /**
-     *
+     * set la description du menu
      * @param description du menu
      * @throws PlatException si description est null
      */
@@ -70,7 +70,7 @@ public class Menu {
     }
 
     /**
-     *
+     * change l'index courant a un specifique
      * @param i index de la position
      */
     public void position(int i)
@@ -79,7 +79,7 @@ public class Menu {
     }
 
     /**
-     *
+     * retourne le plat a l'index courant
      * @return plat a l'index courant
      */
     public PlatAuMenu platCourant()
@@ -112,7 +112,7 @@ public class Menu {
     }
 
     /**
-     *
+     * retourne la taille du menu
      * @return taille l'ArrayList de plat dans le menu
      */
     public double getSize(){
@@ -127,7 +127,7 @@ public class Menu {
     }
 
     /**
-     *
+     * retourne String du menu
      * @return String a afficher
      */
     @Override

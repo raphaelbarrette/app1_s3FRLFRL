@@ -12,7 +12,7 @@ public class BuilderPlatEnfant extends BuilderPlat{
     }
 
     /**
-     *
+     * set la proportion d'un plat enfant
      * @param proportion du plat a build
      */
     public void build_proportion(double proportion){
@@ -20,7 +20,7 @@ public class BuilderPlatEnfant extends BuilderPlat{
     }
 
     /**
-     *
+     * retourne le plat enfant
      * @return plat
      */
     public PlatEnfant getPlat(){

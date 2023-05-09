@@ -10,7 +10,7 @@ public class groupeIngredient {
     private EtatIngredient etat;
 
     /**
-     *
+     * constructeur de groupeIngredient avec typeIngredient et etatIngredient
      * @param typeIngredient du groupeIngredient
      * @param etatIngredient du groupeIngredient
      */
@@ -20,7 +20,7 @@ public class groupeIngredient {
     }
 
     /**
-     *
+     * retourne l'etat de l'ingredient
      * @return etat de l'ingredient
      */
     public EtatIngredient getEtat(){
@@ -28,7 +28,7 @@ public class groupeIngredient {
     }
 
     /**
-     *
+     * retourne type de l'ingredient
      * @return type de l'ingredient
      */
     public TypeIngredient getType(){

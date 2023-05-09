@@ -21,7 +21,7 @@ public class ingredientPlat {
     // constructor filling the list with a list of ingredients
 
     /**
-     *
+     * constructeur de ingredientPlat avec une liste d'ingredients
      * @param ingredients liste d'ingredients a ajouter a la recette
      */
     public ingredientPlat(Ingredient[] ingredients){
@@ -30,14 +30,14 @@ public class ingredientPlat {
     // constructor filling the list with an ArrayList
 
     /**
-     *
+     * constructeur de ingredientPlat avec une ArrayList d'ingredients
      * @param ingredients ArrayList d'ingredients a ajouter a recette
      */
     public ingredientPlat(ArrayList<Ingredient> ingredients){
         this.recette = ingredients;
     }
     /**
-     *
+     * retourne l'ArrayList recette
      * @return ArrayList of ingredients
      */
     public ArrayList<Ingredient> getRecette(){
@@ -45,7 +45,7 @@ public class ingredientPlat {
     }
     // changes the ArrayList to another one
     /**
-     *
+     * set la recette avec une ArrayList d'ingredient
      * @param recette ArrayList replacement for recette
      */
     public void setRecette(ArrayList<Ingredient> recette) {
@@ -54,7 +54,7 @@ public class ingredientPlat {
     // changes the ArrayList to a list
 
     /**
-     *
+     * set la recette avec une liste d'ingredient
      * @param ingredients liste d'ingredient pour remplacer la recette
      */
     public void setRecette(Ingredient[] ingredients){
@@ -63,7 +63,7 @@ public class ingredientPlat {
     // adds an ingredient to the ArrayList
     //adds the qty if the ingredient is already in the ArrayList
     /**
-     *
+     * ajoute un ingredient a l'ArrayList recette
      * @param ingredient a ajouter
      * @throws IngredientException
      */
@@ -81,7 +81,7 @@ public class ingredientPlat {
     }
 
     /**
-     *
+     * retourne String de l'object ingredientPlat
      * @return String a afficher
      */
     public String toString(){

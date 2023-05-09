@@ -33,7 +33,7 @@ public class chef {
     }
 
     /**
-     *
+     * retourne le nom du chef
      * @return nom du chef
      */
     public String getNom(){
@@ -41,7 +41,7 @@ public class chef {
     }
 
     /**
-     *
+     * set le nom du chef
      * @param nom du chef a set
      */
     public void setNom(String nom){
@@ -51,7 +51,7 @@ public class chef {
     }
 
     /**
-     *
+     * retourne String du chef
      * @return String a afficher
      */
     public String toString(){
@@ -74,7 +74,7 @@ public class chef {
     }
 
     /**
-     *
+     * verifie si les ingredients dans l'inventaire on une quantite egale ou plus grande que les ingredients dans la recette
      * @param plat avec les ingredients a verifier
      * @return vrai si ingredient dans l'inventaire, false sinon
      */
@@ -104,7 +104,7 @@ public class chef {
     }
 
     /**
-     *
+     * set l'etat du plat a Servi
      * @param plat a servir
      * @return le plat servi
      */
@@ -114,7 +114,7 @@ public class chef {
     }
 
     /**
-     *
+     * cuisine le plat
      * @param plat a cuisiner
      * @return le plat qui est cuisiner
      * @throws IngredientException si ingredient pas dans inventaire

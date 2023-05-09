@@ -9,7 +9,7 @@ import ingredients.instanceIngredient.Ingredient;
  */
 public class Laitier extends Ingredient {
     /**
-     *
+     * constructeur de Laitier avec le nom et l'etat
      * @param nom du Laitier
      * @param etat du Laitier
      */
@@ -19,7 +19,7 @@ public class Laitier extends Ingredient {
     }
 
     /**
-     *
+     * constructeur de Laitier avec le nom, l'etat et la quantite
      * @param nom du Laitier
      * @param etat du Laitier
      * @param qty du Laitier
@@ -32,7 +32,7 @@ public class Laitier extends Ingredient {
     }
 
     /**
-     *
+     * constructeur de Laitier avec le groupeingredient et le nom
      * @param groupeingredient du Laitier
      * @param nom du Laitier
      */

@@ -5,7 +5,7 @@ package menufact.facture;
  */
 public class FactureEtatOuverte implements FactureEtat{
     /**
-     *
+     * verifie s'il est possible de changer de l'etat ouverte a un autre
      * @param factureEtat etat a lequelle changer
      * @return true si possible, false sinon
      */
@@ -14,7 +14,7 @@ public class FactureEtatOuverte implements FactureEtat{
     }
 
     /**
-     *
+     * retourn String de l'etat ouverte
      * @return String a afficher
      */
     public String toString(){

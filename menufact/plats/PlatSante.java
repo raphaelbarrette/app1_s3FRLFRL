@@ -12,7 +12,7 @@ public class PlatSante extends PlatAuMenu {
     private double gras;
 
     /**
-     *
+     * constructeur de PlatSante avec le code, la description, le prix , le kcal, le chol et le gras
      * @param code du plat enfant
      * @param description du plat enfant
      * @param prix du plat enfant
@@ -35,7 +35,7 @@ public class PlatSante extends PlatAuMenu {
     }
 
     /**
-     *
+     * retourne le String du PlatSante
      * @return String a afficher
      */
     @Override
@@ -48,7 +48,7 @@ public class PlatSante extends PlatAuMenu {
     }
 
     /**
-     *
+     * retourne kcal du plat enfant
      * @return kcal du plat enfant
      */
     public double getKcal() {
@@ -56,7 +56,7 @@ public class PlatSante extends PlatAuMenu {
     }
 
     /**
-     *
+     * retourne chol du plat enfant
      * @return chol du plat enfant
      */
     public double getChol() {
@@ -64,7 +64,7 @@ public class PlatSante extends PlatAuMenu {
     }
 
     /**
-     *
+     * retourne gras du plat enfant
      * @return gras du plat enfant
      */
     public double getGras() {
@@ -72,7 +72,7 @@ public class PlatSante extends PlatAuMenu {
     }
 
     /**
-     *
+     * set kcal du plat enfant
      * @param kcal du plat enfant a set
      */
     public void setKcal(double kcal){
@@ -80,7 +80,7 @@ public class PlatSante extends PlatAuMenu {
     }
 
     /**
-     *
+     * set chol du plat enfant
      * @param chol du plat enfant a set
      */
     public void setChol(double chol){
@@ -88,7 +88,7 @@ public class PlatSante extends PlatAuMenu {
     }
 
     /**
-     *
+     * set gras du plat enfant
      * @param gras du plat a set
      */
     public void setGras(double gras){

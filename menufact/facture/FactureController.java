@@ -15,7 +15,7 @@ public class FactureController {
     private FactureView view;
 
     /**
-     *
+     *constructeur de FactureController avec le modele et le view
      * @param Modele object facture
      * @param View object View pour afficher
      */
@@ -25,7 +25,7 @@ public class FactureController {
     }
 
     /**
-     *
+     * associe un client a la facture
      * @param client a associer a la facture
      */
     public void associerClient(Client client){
@@ -33,7 +33,7 @@ public class FactureController {
     }
 
     /**
-     *
+     * retourne le sousTotal de la facture
      * @return sousTotal de la facture
      */
     public double getSousTotal(){
@@ -41,7 +41,7 @@ public class FactureController {
     }
 
     /**
-     *
+     * retourne le total de la facture
      * @return total de la facture
      */
     public double getTotal(){
@@ -49,7 +49,7 @@ public class FactureController {
     }
 
     /**
-     *
+     * retourne le tps de la facture
      * @return tps de la facture
      */
     public double getTps(){
@@ -57,7 +57,7 @@ public class FactureController {
     }
 
     /**
-     *
+     * retourne le tvq de la facture
      * @return tvq de la facture
      */
     public double getTvq(){
@@ -89,7 +89,7 @@ public class FactureController {
     }
 
     /**
-     *
+     * retourne l'etat de la facture
      * @return etat de la facture
      */
     public FactureEtat getEtat(){
@@ -97,7 +97,7 @@ public class FactureController {
     }
 
     /**
-     *
+     * ajoute un plat a la facture
      * @param p platChoisi a ajouter a la facture
      * @throws FactureException
      * @throws PlatException
@@ -108,7 +108,7 @@ public class FactureController {
     }
 
     /**
-     *
+     * associe un chef a la facture
      * @param cuisinier
      */
     public void observer(chef cuisinier){
@@ -116,7 +116,7 @@ public class FactureController {
     }
 
     /**
-     *
+     * Donne les informations a view
      * @return String a afficher
      */
     public String afficheFacture(){
@@ -131,7 +131,7 @@ public class FactureController {
     }
 
     /**
-     *
+     * donne les informations a view
      * @return String a afficher
      * @throws MenuException
      */

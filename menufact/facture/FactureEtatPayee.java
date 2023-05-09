@@ -5,7 +5,7 @@ package menufact.facture;
  */
 public class FactureEtatPayee implements FactureEtat{
     /**
-     *
+     * verifie s'il est possible de changer de l'etat payee a un autre
      * @param factureEtat etat a lequelle changer
      * @return false car aucun changement possible
      */
@@ -15,7 +15,7 @@ public class FactureEtatPayee implements FactureEtat{
     }
 
     /**
-     *
+     * retourne String de letat payee
      * @return String a afficher
      */
     public String toString(){

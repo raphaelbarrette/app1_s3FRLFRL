@@ -5,7 +5,7 @@ package menufact.plats.etatPlat;
  */
 public class Terminer implements CommandeEtat{
     /**
-     *
+     * verifie s'il est possible de changer de l'etat Terminer a un autre
      * @param commandeEtat etat a lequelle changer
      * @return true si changement possible, false sinon
      */

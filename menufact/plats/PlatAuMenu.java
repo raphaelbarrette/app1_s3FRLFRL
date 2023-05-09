@@ -12,7 +12,7 @@ public class PlatAuMenu {
     private ingredientPlat recette;
 
     /**
-     *
+     * constructeur de PlatAuMenu avec le code, la description et le prix
      * @param code du plat
      * @param description du plat
      * @param prix du plat
@@ -35,7 +35,7 @@ public class PlatAuMenu {
     }
 
     /**
-     *
+     * retourne String du plat
      * @return String a afficher
      */
     @Override
@@ -48,7 +48,7 @@ public class PlatAuMenu {
     }
 
     /**
-     *
+     * retourne le code du plat
      * @return code du plat
      */
     public int getCode() {
@@ -56,7 +56,7 @@ public class PlatAuMenu {
     }
 
     /**
-     *
+     * set le code du plat
      * @param code du plat
      */
     public void setCode(int code) {
@@ -64,7 +64,7 @@ public class PlatAuMenu {
     }
 
     /**
-     *
+     * retourne la description
      * @return description du plat
      */
     public String getDescription() {
@@ -72,7 +72,7 @@ public class PlatAuMenu {
     }
 
     /**
-     *
+     * set lla description du plat
      * @param description du plat a set
      */
     public void setDescription(String description) {
@@ -80,7 +80,7 @@ public class PlatAuMenu {
     }
 
     /**
-     *
+     * retourne la proportion du plat
      * @return proportion du plat
      */
     public double getProportion(){
@@ -88,7 +88,7 @@ public class PlatAuMenu {
     }
 
     /**
-     *
+     * retourne le prix du plat
      * @return prix du plat
      */
     public double getPrix() {
@@ -96,7 +96,7 @@ public class PlatAuMenu {
     }
 
     /**
-     *
+     * set le prix du plat
      * @param prix du plat a set
      */
     public void setPrix(double prix) {
@@ -104,7 +104,7 @@ public class PlatAuMenu {
     }
 
     /**
-     *
+     * set la recette du plat
      * @param recette du plat a set
      */
     public void setRecette(ingredientPlat recette){
@@ -112,7 +112,7 @@ public class PlatAuMenu {
     }
 
     /**
-     *
+     * retourne la recette du plat
      * @return recette du plat
      */
     public ingredientPlat getRecette(){

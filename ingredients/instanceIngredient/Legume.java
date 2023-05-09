@@ -9,7 +9,7 @@ import ingredients.instanceIngredient.Ingredient;
  */
 public class Legume extends Ingredient {
     /**
-     *
+     * constructeur de Legume avec le nom et l'etat
      * @param nom du Legume
      * @param etat du Legume
      */
@@ -19,7 +19,7 @@ public class Legume extends Ingredient {
     }
 
     /**
-     *
+     * constructeur de Legume avec le nom, l'etat et la quantite
      * @param nom du Legume
      * @param etat du Legume
      * @param qty du Legume
@@ -32,7 +32,7 @@ public class Legume extends Ingredient {
     }
 
     /**
-     *
+     * constructeur de Legume avec le groupeingredient et le nom
      * @param groupeingredient du Legume
      * @param nom du Legume
      */

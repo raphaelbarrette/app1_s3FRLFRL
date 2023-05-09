@@ -24,7 +24,7 @@ public class FactureView {
     private double tvqPlat;
 
     /**
-     *
+     * retourne String de la facture
      * @return String a afficher
      */
     public String toString() {
@@ -41,7 +41,7 @@ public class FactureView {
     }
 
     /**
-     *
+     * retourne String de la facture generer
      * @return une chaîne de caractères avec la facture à imprimer
      */
     public String genererFacture() throws MenuException
@@ -74,34 +74,73 @@ public class FactureView {
 
         return factureGenere;
     }
+
+    /**
+     * set la date de la facture
+     * @param date de la facture
+     */
     public void setDate(Date date){this.date = date;}
+
+    /**
+     * set la description de la facture
+     * @param Description de la facture
+     */
     public void setDescription(String Description){
         description=Description;
     }
 
+    /**
+     * retourne l'etat de la facture
+     * @param Etat de la facture
+     */
     public void setEtat(FactureEtat Etat){
         etat=Etat;
     }
 
+    /**
+     * set l'ArrayList de platChoisi de la facture
+     * @param platchoisi de la facture
+     */
     public void setPlatchoisi(ArrayList<PlatChoisi> platchoisi) {
         this.platchoisi = platchoisi;
     }
+
+    /**
+     * set le courant de la facture
+     * @param Courant de la facture
+     */
     public void setCourant(int Courant){
         courant=Courant;
     }
 
+    /**
+     * set le client associe a la facture
+     * @param Client de la facture
+     */
     public void setClient(Client Client){
         client=Client;
     }
 
+    /**
+     * set le tps d'un plat de la facture
+     * @param tpsplat de la facture
+     */
     public void setTpsPlat(double tpsplat){
         tpsPlat=tpsplat;
     }
 
+    /**
+     * set le tvp d'un plat de la facture
+     * @param tvqplat de la facture
+     */
     public void setTvqPlat(double tvqplat){
         tvqPlat=tvqplat;
     }
 
+    /**
+     * set le total de la facture
+     * @param Total de la facture
+     */
     public void setTotal(double Total){
         total=Total;
     }

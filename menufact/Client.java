@@ -9,7 +9,7 @@ public class Client {
     private String numeroCarteCredit;
 
     /**
-     *
+     * constructeur du client avec le idClient, le nom et le numeroCarteCredit
      * @param idClient id du client
      * @param nom du client
      * @param numeroCarteCredit du client
@@ -21,7 +21,7 @@ public class Client {
     }
 
     /**
-     *
+     * retourne le idClient du client
      * @return id du client
      */
     public int getIdClient() {
@@ -29,7 +29,7 @@ public class Client {
     }
 
     /**
-     *
+     * set le IdClient du client
      * @param idClient id du client a set
      */
     public void setIdClient(int idClient) {
@@ -37,7 +37,7 @@ public class Client {
     }
 
     /**
-     *
+     * retourne le nom du client
      * @return nom du client
      */
     public String getNom() {
@@ -45,7 +45,7 @@ public class Client {
     }
 
     /**
-     *
+     * set le nom du client
      * @param nom du client a set
      */
     public void setNom(String nom) {
@@ -55,7 +55,7 @@ public class Client {
     }
 
     /**
-     *
+     * retourne le numeroCarteCredit du client
      * @return numero de la carte de credit du client
      */
     public String getNumeroCarteCredit() {
@@ -63,7 +63,7 @@ public class Client {
     }
 
     /**
-     *
+     * set le numeroCarteCredit du client
      * @param numeroCarteCredit du client a set
      */
     public void setNumeroCarteCredit(String numeroCarteCredit) {
@@ -73,7 +73,7 @@ public class Client {
     }
 
     /**
-     *
+     * retourne String du client
      * @return String a afficher
      */
     @Override

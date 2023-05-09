@@ -30,7 +30,7 @@ public class Inventaire {
     // method to call the constructor if an object of the class doesn't already exist
 
     /**
-     *
+     * createur de l'instance Inventaire
      * @return object inventaire
      */
     public static Inventaire getInstance(){
@@ -43,7 +43,7 @@ public class Inventaire {
     // if already there add the qty
 
     /**
-     *
+     * ajoute une liste d'ingredients a l'inventaire
      * @param ingredients liste d'objet de classe Ingredient
      */
 
@@ -57,7 +57,7 @@ public class Inventaire {
     }
 
     /**
-     *
+     * ajoute un ingredient a l'inventaire
      * @param ingredient objet de la classe Ingredient
      */
     public void ajouter(Ingredient ingredient) throws IngredientException {
@@ -77,7 +77,7 @@ public class Inventaire {
     // if no ingredient returns null
 
     /**
-     *
+     * cree et ajoute un ingredient a l'iventaire
      * @param typeIngredient de l'ingredient a ajouter
      * @param etat de l'ingredient
      * @param nom de l'ingredient
@@ -146,9 +146,9 @@ public class Inventaire {
 
     }
     /**
-     *
+     * retourne l'ingredient en parametre
      * @param i object ingredient
-     * @return l'ingredient qui est ajouter
+     * @return l'ingredient a l'index
      */
     public Ingredient getIngredient(Ingredient i){
         return contenant.get(i.getNom());
@@ -156,7 +156,7 @@ public class Inventaire {
     // returns size of ArrayList
 
     /**
-     *
+     * retourne la taille de l'inventaire
      * @return taille de l'inventaire
      */
     public int getSize(){
@@ -164,7 +164,7 @@ public class Inventaire {
     }
 
     /**
-     *
+     * retourne la quantite d'un ingredient specifique
      * @param ingredient a retourner sa quantite
      * @return quantite de l'ingredient
      */
@@ -178,7 +178,7 @@ public class Inventaire {
     }
 
     /**
-     *
+     * consomme les ingredients de l'inventaire en fonction des ingredients d'une recette
      * @param recette d'ingredient a consommer dans l'inventaire
      * @param quantite de recette
      * @param proportion proportion de la recette
@@ -210,7 +210,7 @@ public class Inventaire {
     }
 
     /**
-     *
+     * retourne String de l'inventaire
      * @return String a afficher
      */
     public String toString(){
@@ -218,7 +218,7 @@ public class Inventaire {
     }
 
     /**
-     *
+     * retourne l'object inventaire
      * @return l'object inventaire
      */
     public Inventaire returnInstance(){

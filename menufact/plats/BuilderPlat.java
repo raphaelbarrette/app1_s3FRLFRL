@@ -16,7 +16,7 @@ public class BuilderPlat {
     }
 
     /**
-     *
+     * retourne plat
      * @return PlatAuMenu
      */
     public PlatAuMenu getPlat(){
@@ -31,7 +31,7 @@ public class BuilderPlat {
     }
 
     /**
-     *
+     * set la description d'un plat
      * @param description du plat a build
      */
     public void build_description(String description){
@@ -39,7 +39,7 @@ public class BuilderPlat {
     }
 
     /**
-     *
+     * set le prix d'un plat
      * @param prix du plat a build
      */
     public void build_prix(double prix){
@@ -47,7 +47,7 @@ public class BuilderPlat {
     }
 
     /**
-     *
+     * set la recette d'un plat
      * @param recette du plat a build
      */
     public void build_recette(ingredientPlat recette){
@@ -55,7 +55,7 @@ public class BuilderPlat {
     }
 
     /**
-     *
+     * cree et set la recette d'un plat avec un liste d'ingredient
      * @param ingredients liste d'ingredient a ajouter dans la recette
      */
     public void buid_recette(Ingredient[] ingredients){
