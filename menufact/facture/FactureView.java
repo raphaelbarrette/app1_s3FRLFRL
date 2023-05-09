@@ -19,6 +19,11 @@ public class FactureView {
     private double total;
     private double tpsPlat;
     private double tvqPlat;
+
+    /**
+     *
+     * @return String a afficher
+     */
     public String toString() {
         return "menufact.facture.Facture{" +
                 "date=" + date +

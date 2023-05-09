@@ -1,7 +1,11 @@
 package menufact.plats.etatPlat;
 
 public class Servi implements CommandeEtat{
-    //returns false because it is the last state possible
+    /**
+     *
+     * @param commandeEtat etat a lequelle changer
+     * @return true si possible, false sinon
+     */
     public boolean changerEtat(CommandeEtat commandeEtat){
         return false;
     }

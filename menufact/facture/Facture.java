@@ -207,27 +207,58 @@ public class Facture {
     }
     */
 
+    /**
+     *
+     * @param cuisinier object class chef a associer
+     */
     public void observer(chef cuisinier){
         chef = cuisinier;
     }
 
+    /**
+     *
+     * @return description Facture
+     */
     public String getDescription(){
         return description;
     }
+
+    /**
+     *
+     * @return ArrayList de platChoisi
+     */
     public ArrayList<PlatChoisi> getPlatChoisi(){
         return platchoisi;
     }
+
+    /**
+     *
+     * @return courant de la facture
+     */
     public int getCourant(){
         return courant;
     }
 
+    /**
+     *
+     * @return client associer a la facture
+     */
     public Client getClient(){
         return client;
     }
 
+    /**
+     *
+     * @return chef associer a la facture
+     */
     public chef getChef(){
         return chef;
     }
+
+    /**
+     *
+     * @return ArrayList de PlatChoisi
+     */
     public ArrayList<PlatChoisi> getPlatsChoisis(){
         return platchoisi;
     }
