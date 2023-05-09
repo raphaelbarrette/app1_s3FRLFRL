@@ -7,6 +7,9 @@ import menufact.plats.PlatChoisi;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * class FActureView pour le View du MVC de facture
+ */
 public class FactureView {
     private Date date;
     private String description;
@@ -19,6 +22,11 @@ public class FactureView {
     private double total;
     private double tpsPlat;
     private double tvqPlat;
+
+    /**
+     *
+     * @return String a afficher
+     */
     public String toString() {
         return "menufact.facture.Facture{" +
                 "date=" + date +
@@ -66,7 +74,7 @@ public class FactureView {
 
         return factureGenere;
     }
-
+    public void setDate(Date date){this.date = date;}
     public void setDescription(String Description){
         description=Description;
     }

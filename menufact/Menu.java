@@ -2,19 +2,32 @@ package menufact;
 
 import menufact.exceptions.MenuException;
 import menufact.plats.PlatAuMenu;
+import menufact.plats.exceptions.PlatException;
 
 import java.util.ArrayList;
 
+/**
+ * class Menu pour le menu ou on rajoute les plats
+ */
 public class Menu {
     private static Menu instance = null;
     private String description;
-
     private int courant;
     private ArrayList<PlatAuMenu> plat = new ArrayList<PlatAuMenu>();
 
+    /**\
+     * private constructor pour singleton
+     * @param description du menu
+     */
     private Menu(String description) {
         this.description = description;
     }
+
+    /**
+     * cree object menu si aucun existe sinon retourne celui qui existe
+     * @param description du menu
+     * @return object de menu
+     */
     public static Menu getInstance(String description){
         if (instance == null){
             instance = new Menu(description);
@@ -22,8 +35,16 @@ public class Menu {
         return instance;
     }
 
-    void ajoute (PlatAuMenu p)
+    /**
+     *
+     * @param p plat a ajouter
+     * @throws PlatException si plat est null
+     */
+    void ajoute (PlatAuMenu p) throws PlatException
     {
+        if (p == null){
+            throw new PlatException("Impossible d'ajouter plat null");
+        }
         plat.add(p);
     }
 
@@ -35,22 +56,41 @@ public class Menu {
         return this.description;
     }
 
-    public void setDescription(String description){
+    /**
+     *
+     * @param description du menu
+     * @throws PlatException si description est null
+     */
+    public void setDescription(String description) throws PlatException{
         if (description != null){
             this.description = description;
+        } else {
+            throw new PlatException("Impossible d'ajouter description null");
         }
     }
 
+    /**
+     *
+     * @param i index de la position
+     */
     public void position(int i)
     {
         courant = i;
     }
 
+    /**
+     *
+     * @return plat a l'index courant
+     */
     public PlatAuMenu platCourant()
     {
         return plat.get(courant);
     }
 
+    /**
+     * bouge d'une position dans les plats de la facture
+     * @throws MenuException si on depasse le nombre maximal de plat
+     */
     public void positionSuivante() throws MenuException
     {
         if (courant+1 >= plat.size())
@@ -59,6 +99,10 @@ public class Menu {
             courant++;
     }
 
+    /**
+     * bouge d'une position dans les plats de la facture
+     * @throws MenuException si on depasse le nombre minimale de plats
+     */
     public void positionPrecedente() throws MenuException
     {
         if (courant-1 < 0)
@@ -66,13 +110,26 @@ public class Menu {
         else
             courant--;
     }
+
+    /**
+     *
+     * @return taille l'ArrayList de plat dans le menu
+     */
     public double getSize(){
         return plat.size();
     }
+
+    /**
+     * vide ArrayList
+     */
     public void clear(){
         plat.clear();
     }
 
+    /**
+     *
+     * @return String a afficher
+     */
     @Override
     public String toString() {
         return "menufact.Menu{" +

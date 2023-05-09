@@ -1,17 +1,16 @@
 package menufact;
 
 import ingredients.exceptions.IngredientException;
+import ingredients.factory.ConcreteCreatorFruit;
 import ingredients.instanceIngredient.*;
 import inventaire.Inventaire;
 import inventaire.ingredientPlat;
-import menufact.facture.FactureEtatFermee;
-import menufact.facture.FactureEtatOuverte;
-import menufact.facture.FactureEtatPayee;
+import menufact.facture.*;
 import menufact.facture.exceptions.FactureException;
 import menufact.exceptions.MenuException;
-import menufact.facture.Facture;
 import menufact.plats.*;
 import menufact.plats.etatPlat.*;
+import ingredients.instanceIngredient.TypeIngredient;
 
 import menufact.plats.etatPlat.Servi;
 import menufact.plats.exceptions.PlatException;
@@ -176,27 +175,270 @@ class chefTest {
     }
 }
 
-class FactureTest {
-    Client client = new Client(10, "Kevin", "27");
-    Facture facture = new Facture("Facture 1");
-    @Test
-    void ouvrir() throws FactureException{
-        assertThrows(FactureException.class, ()->{
-            facture.ouvrir();
-        });
+class FactureControllerTest {
+
+    private Inventaire inventaire;
+    ArrayList<Ingredient> ingredientsRecette=new ArrayList<>();
+    groupeIngredient groupeFraise;
+    Ingredient fraise;
+    ingredientPlat recette;
+    PlatAuMenu plat1;
+    PlatChoisi pch1;
+    Facture facture;
+    FactureView view;
+    FactureController controller;
+    Client kevin;
+    chef gustau;
+
+    @BeforeEach
+    void setUp() throws IngredientException, PlatException {
+        groupeFraise=new groupeIngredient(TypeIngredient.FRUIT, new EtatSolide(5));
+        fraise= ConcreteCreatorFruit.creer(groupeFraise, "fraise");
+
+        ingredientsRecette= new ArrayList<>();
+        ingredientsRecette.add(fraise);
+
+        inventaire = Inventaire.getInstance();
+        inventaire.ajouter(TypeIngredient.FRUIT, new EtatSolide(50), "fraise");
+
+
+
+        recette= new ingredientPlat(ingredientsRecette);
+
+        plat1= new PlatAuMenu(1, "menoum plat aux fruits", 10.0);
+        plat1.setRecette(recette);
+
+        pch1= new PlatChoisi(plat1, 2);
+
+        facture = new Facture("Ma facture");
+        view= new FactureView();
+        controller= new FactureController(facture,view);
+
+        kevin= new Client(01,"kevin", "abshsh");
+        gustau= chef.getInstance();
+        gustau.setNom("gustau");
+
+
     }
+
     @Test
-    void fermee_getEtat() throws FactureException {
-        facture.fermer();
-        assertTrue(facture.getEtat() instanceof FactureEtatFermee);
+    void afficheFacture() throws PlatException, IngredientException, FactureException {
+        controller.associerClient(kevin);
+        controller.observer(gustau);
+
+        String expectedString= "menufact.facture.Facture{date="+facture.getDate()+", description='Ma facture', etat=Facture etat ouverte, platchoisi=[], courant=-1, client=menufact.Client{idClient=1, nom='kevin', numeroCarteCredit='abshsh'}, TPS=0.05, TVQ=0.095}";
+
+
+        assertEquals(expectedString, controller.afficheFacture());
+
+
+        String expectedString2= "menufact.facture.Facture{date="+facture.getDate()+", description='Ma facture', etat=Facture etat ouverte, platchoisi=[menufact.plats.PlatChoisi{quantite=2, plat=menufact.plats.PlatAuMenu{code=1, description='menoum plat aux fruits', prix=10.0}\n}], courant=-1, client=menufact.Client{idClient=1, nom='kevin', numeroCarteCredit='abshsh'}, TPS=0.05, TVQ=0.095}";
+        controller.ajoutePlat(pch1);
+        assertEquals(expectedString2, controller.afficheFacture());
+
     }
+
     @Test
-    void paye_getEtat() throws FactureException{
-        facture.payer();
+    void genereFacture() throws IngredientException, PlatException, MenuException, FactureException {
+        controller.associerClient(kevin);
+        controller.observer(gustau);
+
+        controller.ajoutePlat(pch1);
+        controller.payer();
+        String expectedString="Facture generee.\n" +
+                "Date:"+facture.getDate()+"\n" +
+                "Description: Ma facture\n" +
+                "Client:kevin\n" +
+                "Les plats commandes:\n" +
+                "Seq   Plat         Prix   Quantite\n" +
+                "1     menoum plat aux fruits  10.0      2\n" +
+                "          TPS:               1.0\n" +
+                "          TVQ:               1.9\n" +
+                "          Le total est de:   22.9\n";
+        assertEquals(expectedString,controller.genereFacture());
+
+
+    }
+
+    @Test
+    void associerClient(){
+        controller.associerClient(kevin);
+        assertEquals(kevin,facture.getClient());
+    }
+
+    @Test
+    void observer(){
+        controller.observer(gustau);
+        assertEquals(gustau,facture.getChef());
+
+    }
+
+    @Test
+    void payer() throws FactureException {
+        controller.payer();
+        FactureEtat etatPayee = new FactureEtatPayee();
         assertTrue(facture.getEtat() instanceof FactureEtatPayee);
     }
-    //@Test
+    @Test
+    void fermer() throws FactureException {
+        controller.fermer();
+        FactureEtat etatFermee = new FactureEtatFermee();
+        assertTrue(facture.getEtat() instanceof FactureEtatFermee);
+    }
 
+    @Test
+    void ouvrir() throws FactureException {
+        controller.fermer();
+        controller.ouvrir();
+        FactureEtat etatOuvrir = new FactureEtatOuverte();
+        assertTrue(facture.getEtat() instanceof FactureEtatOuverte);
+    }
+
+    @Test
+    void ajoutePlat() throws PlatException, FactureException {
+        controller.observer(gustau);
+        controller.ajoutePlat(pch1);
+        ArrayList<PlatChoisi> expectedPlats = new ArrayList<>();
+        expectedPlats.add(pch1);
+        assertEquals(expectedPlats, facture.getPlatsChoisis() );
+
+    }
+
+    @Test
+    void getSousTotal() throws PlatException, FactureException {
+        controller.observer(gustau);
+        controller.ajoutePlat(pch1);
+        double expectedSousTotal= 20.0;
+        assertEquals(expectedSousTotal, controller.getSousTotal() );
+
+    }
+
+    @Test
+    void getTps() throws PlatException, FactureException {
+        controller.observer(gustau);
+        controller.ajoutePlat(pch1);
+        double expectedTps= 20.0*0.05;
+        assertEquals(expectedTps, controller.getTps() );
+
+    }
+
+    @Test
+    void getTvq() throws PlatException, FactureException {
+        controller.observer(gustau);
+        controller.ajoutePlat(pch1);
+        double expectedTvq= 20.0*0.095;
+        assertEquals(expectedTvq, controller.getTvq());
+    }
+
+    void getTotal() throws PlatException, FactureException {
+        controller.observer(gustau);
+        controller.ajoutePlat(pch1);
+        double expectedTotal= 20.0*0.095+20.0*0.05+20.0;
+        assertEquals(expectedTotal,controller.getTotal());
+
+    }
+
+
+
+}
+
+class FactureEtatFermeeTest {
+
+    @Test
+    public void testChangerEtat() {
+        FactureEtatFermee etatFermee = new FactureEtatFermee();
+
+        // Test avec un état valide pour changer en FactureEtatPayee
+        boolean expected = true;
+        boolean actual = etatFermee.changerEtat(new FactureEtatPayee());
+        assertEquals(expected, actual);
+
+        // Test avec un état valide pour changer en FactureEtatOuverte
+        expected = true;
+        actual = etatFermee.changerEtat(new FactureEtatOuverte());
+        assertEquals(expected, actual);
+
+        // Test avec un état invalide pour changer en FactureEtatFermee
+        expected = false;
+        actual = etatFermee.changerEtat(new FactureEtatFermee());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testToString() {
+        FactureEtatFermee etatFermee = new FactureEtatFermee();
+
+        // Test du contenu de la chaîne de caractères renvoyée
+        String expected = "Facture etat fermee";
+        String actual = etatFermee.toString();
+        assertEquals(expected, actual);
+    }
+}
+
+class FactureEtatOuverteTest {
+
+    @Test
+    public void testChangerEtat() {
+        FactureEtatOuverte etatOuverte = new FactureEtatOuverte();
+
+        // Test avec un état valide pour changer en FactureEtatFermee
+        boolean expected = true;
+        boolean actual = etatOuverte.changerEtat(new FactureEtatFermee());
+        assertEquals(expected, actual);
+
+        // Test avec un état valide pour changer en FactureEtatPayee
+        expected = true;
+        actual = etatOuverte.changerEtat(new FactureEtatPayee());
+        assertEquals(expected, actual);
+
+        // Test avec un état invalide pour changer en FactureEtatOuverte
+        expected = false;
+        actual = etatOuverte.changerEtat(new FactureEtatOuverte());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testToString() {
+        FactureEtatOuverte etatOuverte = new FactureEtatOuverte();
+
+        // Test du contenu de la chaîne de caractères renvoyée
+        String expected = "Facture etat ouverte";
+        String actual = etatOuverte.toString();
+        assertEquals(expected, actual);
+    }
+}
+
+class FactureEtatPayeeTest {
+
+    @Test
+    public void testChangerEtat() {
+        FactureEtatPayee etatPayee = new FactureEtatPayee();
+
+        // Test que l'état ne peut pas être changé en FactureEtatOuverte
+        boolean expected = false;
+        boolean actual = etatPayee.changerEtat(new FactureEtatOuverte());
+        assertEquals(expected, actual);
+
+        // Test que l'état ne peut pas être changé en FactureEtatFermee
+        expected = false;
+        actual = etatPayee.changerEtat(new FactureEtatFermee());
+        assertEquals(expected, actual);
+
+        // Test que l'état ne peut pas être changé en FactureEtatPayee
+        expected = false;
+        actual = etatPayee.changerEtat(new FactureEtatPayee());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testToString() {
+        FactureEtatPayee etatPayee = new FactureEtatPayee();
+
+        // Test du contenu de la chaîne de caractères renvoyée
+        String expected = "Facture etat payee";
+        String actual = etatPayee.toString();
+        assertEquals(expected, actual);
+    }
 }
 
 class PlatEnfantTest {
@@ -515,14 +757,14 @@ class MenuTest {
     }
 
     @Test
-    public void testGetDescription() {
+    public void testGetDescription() throws PlatException {
         Menu m = Menu.getInstance("Menu");
         m.setDescription("Menu");
         assertEquals("Menu", m.getDescription()); // should return true since description was set to "Menu"
     }
 
     @Test
-    public void testSetDescription() {
+    public void testSetDescription() throws PlatException {
         Menu m = Menu.getInstance("Menu");
         m.setDescription("New Menu");
         assertEquals("New Menu", m.getDescription()); // should return true since description was updated to "New Menu"
@@ -673,18 +915,18 @@ class ingredientPlatTest {
 
     @Test
     public void testAjouter() throws IngredientException {
-        ingredientPlat plat = new ingredientPlat();
+        ingredientPlat recette = new ingredientPlat();
         Ingredient i1 = new Viande("boeuf", new EtatSolide(2));
         Ingredient i2 = new Legume("concombre", new EtatLiquide(2));
         Ingredient i3 = new Laitier("lait", new EtatLiquide(2));
-        plat.ajouter(i1);
-        plat.ajouter(i2);
-        plat.ajouter(i3);
+        recette.ajouter(i1);
+        recette.ajouter(i2);
+        recette.ajouter(i3);
         ArrayList<Ingredient> expected = new ArrayList<>();
         expected.add(i1);
         expected.add(i2);
         expected.add(i3);
-        assertEquals(expected, plat.getRecette());
+        assertEquals(expected, recette.getRecette());
     }
 
     @Test
@@ -700,11 +942,227 @@ class ingredientPlatTest {
     }
 }
 
+class EpiceTest {
 
+    @Test
+    public void testConstructor() throws IngredientException {
+        Epice epice = new Epice("paprika", new EtatLiquide(0.2));
+        assertEquals("paprika", epice.getNom());
+        assertTrue(epice.getEtat() instanceof EtatLiquide);
+        assertEquals(0.2, epice.get_Qty(), 0.001);
+    }
 
+    @Test
+    public void testConstructorWithoutQty() throws IngredientException {
+        groupeIngredient groupeIngredient = new groupeIngredient(TypeIngredient.EPICE, new EtatLiquide(0));
+        Epice epice = new Epice(groupeIngredient, "cumin");
+        assertEquals("cumin", epice.getNom());
+        assertEquals(groupeIngredient, epice.getGroupe());
+        assertTrue(epice.getEtat() instanceof EtatLiquide);
+        assertEquals(0.0, epice.get_Qty(), 0.001);
+    }
 
+}
 
+class FruitTest {
 
+    @Test
+    public void testConstructor() throws IngredientException {
+        Fruit fruit = new Fruit("fraise", new EtatLiquide(0.2));
+        assertEquals("fraise", fruit.getNom());
+        assertTrue(fruit.getEtat() instanceof EtatLiquide);
+        assertEquals(0.2, fruit.get_Qty(), 0.001);
+    }
+
+    @Test
+    public void testConstructorWithoutQty() throws IngredientException {
+        groupeIngredient groupeIngredient = new groupeIngredient(TypeIngredient.FRUIT, new EtatLiquide(0));
+        Fruit fruit = new Fruit(groupeIngredient, "fraise");
+        assertEquals("fraise", fruit.getNom());
+        assertEquals(groupeIngredient, fruit.getGroupe());
+        assertTrue(fruit.getEtat() instanceof EtatLiquide);
+        assertEquals(0.0, fruit.get_Qty(), 0.001);
+    }
+
+}
+
+class LaitierTest {
+
+    @Test
+    public void testConstructor() throws IngredientException {
+        Laitier laitier = new Laitier("lait", new EtatLiquide(0.2));
+        assertEquals("lait", laitier.getNom());
+        assertTrue(laitier.getEtat() instanceof EtatLiquide);
+        assertEquals(0.2, laitier.get_Qty(), 0.001);
+    }
+
+    @Test
+    public void testConstructorWithoutQty() throws IngredientException {
+        groupeIngredient groupeIngredient = new groupeIngredient(TypeIngredient.LAITIER, new EtatLiquide(0));
+        Laitier laitier = new Laitier(groupeIngredient, "lait");
+        assertEquals("lait", laitier.getNom());
+        assertEquals(groupeIngredient, laitier.getGroupe());
+        assertTrue(laitier.getEtat() instanceof EtatLiquide);
+        assertEquals(0.0, laitier.get_Qty(), 0.001);
+    }
+
+}
+
+class ViandeTest {
+
+    @Test
+    public void testConstructor() throws IngredientException {
+        Viande viande = new Viande("viande", new EtatLiquide(0.2));
+        assertEquals("viande", viande.getNom());
+        assertTrue(viande.getEtat() instanceof EtatLiquide);
+        assertEquals(0.2, viande.get_Qty(), 0.001);
+    }
+
+    @Test
+    public void testConstructorWithoutQty() throws IngredientException {
+        groupeIngredient groupeIngredient = new groupeIngredient(TypeIngredient.VIANDE, new EtatLiquide(0));
+        Viande viande = new Viande(groupeIngredient, "viande");
+        assertEquals("viande", viande.getNom());
+        assertEquals(groupeIngredient, viande.getGroupe());
+        assertTrue(viande.getEtat() instanceof EtatLiquide);
+        assertEquals(0.0, viande.get_Qty(), 0.001);
+    }
+
+}
+
+class LegumeTest {
+
+    @Test
+    public void testConstructor() throws IngredientException {
+        Legume legume = new Legume("legume", new EtatLiquide(0.2));
+        assertEquals("legume", legume.getNom());
+        assertTrue(legume.getEtat() instanceof EtatLiquide);
+        assertEquals(0.2, legume.get_Qty(), 0.001);
+    }
+
+    @Test
+    public void testConstructorWithoutQty() throws IngredientException {
+        groupeIngredient groupeIngredient = new groupeIngredient(TypeIngredient.LEGUME, new EtatLiquide(0));
+        Legume legume = new Legume(groupeIngredient, "legume");
+        assertEquals("legume", legume.getNom());
+        assertEquals(groupeIngredient, legume.getGroupe());
+        assertTrue(legume.getEtat() instanceof EtatLiquide);
+        assertEquals(0.0, legume.get_Qty(), 0.001);
+    }
+
+}
+
+class EtatSolideTest {
+    @Test
+    public void testConstructorAndGetQty() throws IngredientException {
+        EtatSolide etat = new EtatSolide(1.5);
+        assertEquals(1.5, etat.get_Qty(), 0.0001);
+    }
+
+    @Test
+    public void testSetQty() throws IngredientException {
+        EtatSolide etat = new EtatSolide(1.5);
+        etat.set_Qty(2.0);
+        assertEquals(2.0, etat.get_Qty(), 0.0001);
+    }
+
+    @Test
+    public void testSetQtyWithNegativeValue() {
+        assertThrows(IngredientException.class, () -> {
+            EtatSolide etat = new EtatSolide(1.5);
+            etat.set_Qty(-1.0);
+        });
+    }
+
+    @Test
+    public void testToString() throws IngredientException {
+        EtatSolide etat = new EtatSolide(1.5);
+        assertEquals("Solide, Quantite : 1.5\n", etat.toString());
+    }
+
+    @Test
+    public void testGetEtat() throws IngredientException {
+        EtatSolide etat = new EtatSolide(1.5);
+        assertEquals("Solide", etat.getEtat());
+    }
+
+    @Test
+    public void testEquals() throws IngredientException {
+        EtatSolide etat1 = new EtatSolide(1.5);
+        EtatSolide etat2 = new EtatSolide(1.5);
+        EtatSolide etat3 = new EtatSolide(2.0);
+
+        assertTrue(etat1.equals(etat2));
+        assertFalse(etat1.equals(etat3));
+    }
+
+    @Test
+    public void testAddQty() throws IngredientException {
+        EtatSolide etat1 = new EtatSolide(1.5);
+        EtatSolide etat2 = new EtatSolide(2.0);
+
+        etat1.addQty(etat2);
+        assertEquals(3.5, etat1.get_Qty(), 0.0001);
+    }
+}
+
+class EtatLiquideTest {
+
+    @Test
+    public void testConstructor() throws IngredientException {
+        EtatLiquide e = new EtatLiquide(1.5);
+        assertEquals(1.5, e.get_Qty(), 0.0);
+    }
+
+    @Test
+    public void testConstructorThrowsException() {
+        assertThrows(IngredientException.class, () -> {
+            new EtatLiquide(-1.5);
+        });
+    }
+
+    @Test
+    public void testToString() throws IngredientException {
+        EtatLiquide e = new EtatLiquide(2.0);
+        String expected = "Liquide, Quantite : 2.0\n";
+        assertEquals(expected, e.toString());
+    }
+
+    @Test
+    public void testEquals() throws IngredientException {
+        EtatLiquide e1 = new EtatLiquide(3.0);
+        EtatLiquide e2 = new EtatLiquide(3.0);
+        EtatLiquide e3 = new EtatLiquide(2.0);
+        assertEquals(e1, e2);
+        assertNotEquals(e1, e3);
+    }
+
+    @Test
+    public void testAddQty() throws IngredientException {
+        EtatLiquide e1 = new EtatLiquide(1.5);
+        EtatLiquide e2 = new EtatLiquide(2.5);
+        e1.addQty(e2);
+        assertEquals(4.0, e1.get_Qty(), 0.0);
+    }
+}
+
+class IngredientFactoryTest {
+
+    @Test
+    public void testCreateCompositeKey() {
+        IngredientFactory factory = new IngredientFactory();
+
+        // Test avec un TypeIngredient et un etat valides
+        String expectedKey = "FRUIT-Frais";
+        String actualKey = factory.createCompositeKey(TypeIngredient.FRUIT, "Frais");
+        assertEquals(expectedKey, actualKey);
+
+        // Test avec un TypeIngredient et un etat invalides
+        expectedKey = "FRUIT-Pourrie";
+        actualKey = factory.createCompositeKey(TypeIngredient.FRUIT, "Pourrie");
+        assertEquals(expectedKey, actualKey);
+    }
+}
 
 
 
