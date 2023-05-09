@@ -74,7 +74,7 @@ public class FactureView {
 
         return factureGenere;
     }
-
+    public void setDate(Date date){this.date = date;}
     public void setDescription(String Description){
         description=Description;
     }

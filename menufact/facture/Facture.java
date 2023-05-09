@@ -254,4 +254,8 @@ public class Facture {
     public ArrayList<PlatChoisi> getPlatsChoisis(){
         return platchoisi;
     }
+
+    public Date getDate(){
+        return this.date;
+    }
 }

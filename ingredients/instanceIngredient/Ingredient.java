@@ -67,7 +67,7 @@ public abstract class Ingredient {
      * @return String a afficher
      */
     public String toString(){
-        return "Ingredient : " + this.getNom() + " Etat: " + etatIngredient + "\n";
+        return "Ingredient : " + this.getNom() + " Etat: " + etatIngredient;
     }
 
     /**

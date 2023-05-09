@@ -125,6 +125,7 @@ public class FactureController {
         view.setPlatchoisi(modele.getPlatsChoisis());
         view.setCourant(modele.getCourant());
         view.setClient(modele.getClient());
+        view.setDate(modele.getDate());
         return view.toString();
 
     }
