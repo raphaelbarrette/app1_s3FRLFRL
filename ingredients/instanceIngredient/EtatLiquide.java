@@ -3,6 +3,9 @@ package ingredients.instanceIngredient;
 import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.EtatIngredient;
 
+/**
+ * class EtatLiquide utilise l'interface EtatIngredient
+ */
 public class EtatLiquide implements EtatIngredient {
     private double qtyL;
     private String etat="liquide";

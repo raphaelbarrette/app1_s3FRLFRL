@@ -2,6 +2,9 @@ package ingredients.instanceIngredient;
 import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.EtatIngredient;
 
+/**
+ * class EtatSolide qui utilise EtatIngredient
+ */
 public class EtatSolide implements EtatIngredient {
     private double qtykg;
     private String etat="Solide";

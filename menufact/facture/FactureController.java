@@ -7,7 +7,9 @@ import menufact.plats.PlatChoisi;
 import menufact.plats.exceptions.PlatException;
 import menufact.Client;
 
-
+/**
+ * controller du MVC de la facture
+ */
 public class FactureController {
     private Facture modele;
     private FactureView view;
@@ -120,7 +122,7 @@ public class FactureController {
     public String afficheFacture(){
         view.setDescription(modele.getDescription());
         view.setEtat(modele.getEtat());
-        view.setPlatchoisi(modele.getPlatChoisi());
+        view.setPlatchoisi(modele.getPlatsChoisis());
         view.setCourant(modele.getCourant());
         view.setClient(modele.getClient());
         return view.toString();
@@ -135,7 +137,7 @@ public class FactureController {
     public String genereFacture() throws MenuException {
         view.setDescription(modele.getDescription());
         view.setEtat(modele.getEtat());
-        view.setPlatchoisi(modele.getPlatChoisi());
+        view.setPlatchoisi(modele.getPlatsChoisis());
         view.setCourant(modele.getCourant());
         view.setClient(modele.getClient());
         view.setTpsPlat(modele.tps());

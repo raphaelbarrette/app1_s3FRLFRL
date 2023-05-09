@@ -7,6 +7,9 @@ import ingredients.instanceIngredient.groupeIngredient;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * class IngredientFactory pour la factory
+ */
 public class IngredientFactory {
     private Map<String, groupeIngredient> groupeIngredientMap = new HashMap<>();
 

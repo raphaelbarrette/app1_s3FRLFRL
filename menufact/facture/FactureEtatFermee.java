@@ -1,5 +1,8 @@
 package menufact.facture;
 
+/**
+ * class FactureEtatFermee  pour l'etat fermee
+ */
 public class FactureEtatFermee implements FactureEtat{
     /**
      *

@@ -7,6 +7,9 @@ import menufact.plats.PlatChoisi;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * class FActureView pour le View du MVC de facture
+ */
 public class FactureView {
     private Date date;
     private String description;

@@ -4,6 +4,9 @@ import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.EtatIngredient;
 import ingredients.instanceIngredient.Ingredient;
 
+/**
+ * class Laitier sous classe de Ingredient
+ */
 public class Laitier extends Ingredient {
     /**
      *

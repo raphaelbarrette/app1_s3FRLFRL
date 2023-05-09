@@ -2,6 +2,9 @@ package ingredients.instanceIngredient;
 
 import ingredients.exceptions.IngredientException;
 
+/**
+ * class Fruit sous class de Ingredient
+ */
 public class Fruit extends Ingredient {
     /**
      *

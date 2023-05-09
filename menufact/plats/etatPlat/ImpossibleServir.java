@@ -1,5 +1,8 @@
 package menufact.plats.etatPlat;
 
+/**
+ * class Impossible Servir pour l'etat ImpossibleServir des plats
+ */
 public class ImpossibleServir implements CommandeEtat{
     //return only false because no state after it
 

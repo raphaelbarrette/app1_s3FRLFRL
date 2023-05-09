@@ -3,7 +3,9 @@ package ingredients.instanceIngredient;
 import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.EtatIngredient;
 
-//abstract for bridge
+/**
+ * abstract pour le bridge
+ */
 public abstract class Ingredient {
     protected String nom;
     protected EtatIngredient etatIngredient;

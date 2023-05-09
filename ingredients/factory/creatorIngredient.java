@@ -5,7 +5,9 @@ import ingredients.instanceIngredient.EtatIngredient;
 import ingredients.instanceIngredient.Ingredient;
 import ingredients.instanceIngredient.groupeIngredient;
 
-
+/**
+ * interface pour la factory qui cree les ingredients
+ */
 public interface creatorIngredient {
     /**
      *

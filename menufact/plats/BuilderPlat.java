@@ -2,6 +2,9 @@ package menufact.plats;
 import ingredients.instanceIngredient.Ingredient;
 import inventaire.ingredientPlat;
 
+/**
+ * class BuilderPlat pour le builder des plats
+ */
 public class BuilderPlat {
     protected PlatAuMenu plat;
 

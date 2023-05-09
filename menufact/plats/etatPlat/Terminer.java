@@ -1,5 +1,8 @@
 package menufact.plats.etatPlat;
 
+/**
+ * class Terminer pour l'etat Terminer des plats
+ */
 public class Terminer implements CommandeEtat{
     /**
      *

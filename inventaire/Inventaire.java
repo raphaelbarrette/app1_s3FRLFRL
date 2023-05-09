@@ -5,7 +5,11 @@ import ingredients.factory.*;
 import ingredients.instanceIngredient.*;
 
 import java.util.HashMap;
-//singleton
+
+/**
+ * class Inventaire qui gere les ingredients disponible pour consommer un recette
+ * singleton
+ */
 public class Inventaire {
     private static Inventaire instance = null;
 

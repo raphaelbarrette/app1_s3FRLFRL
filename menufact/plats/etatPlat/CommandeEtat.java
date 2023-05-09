@@ -1,5 +1,8 @@
 package menufact.plats.etatPlat;
 
+/**
+ * interface CommandeEtat pour les etat des plats
+ */
 public interface CommandeEtat {
     /**
      *

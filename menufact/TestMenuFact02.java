@@ -757,14 +757,14 @@ class MenuTest {
     }
 
     @Test
-    public void testGetDescription() {
+    public void testGetDescription() throws PlatException {
         Menu m = Menu.getInstance("Menu");
         m.setDescription("Menu");
         assertEquals("Menu", m.getDescription()); // should return true since description was set to "Menu"
     }
 
     @Test
-    public void testSetDescription() {
+    public void testSetDescription() throws PlatException {
         Menu m = Menu.getInstance("Menu");
         m.setDescription("New Menu");
         assertEquals("New Menu", m.getDescription()); // should return true since description was updated to "New Menu"

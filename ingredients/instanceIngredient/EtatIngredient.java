@@ -2,6 +2,9 @@ package ingredients.instanceIngredient;
 
 import ingredients.exceptions.IngredientException;
 
+/**
+ * interface pour les Etat d'Ingredient
+ */
 public interface EtatIngredient
 {
     /**

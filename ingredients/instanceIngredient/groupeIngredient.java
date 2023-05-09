@@ -1,5 +1,8 @@
 package ingredients.instanceIngredient;
 
+/**
+ * class groupeIngredient regroupe type de l'ingredient et l'etat de l'ingredient
+ */
 public class groupeIngredient {
     //type de l<ingredient aka fruit, legume, etc.
     private TypeIngredient type;

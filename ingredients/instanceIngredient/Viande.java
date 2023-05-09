@@ -4,6 +4,9 @@ import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.EtatIngredient;
 import ingredients.instanceIngredient.Ingredient;
 
+/**
+ * class Viande sous classe de ingredient
+ */
 public class Viande extends Ingredient {
     /**
      *

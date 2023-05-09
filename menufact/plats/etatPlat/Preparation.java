@@ -1,5 +1,8 @@
 package menufact.plats.etatPlat;
 
+/**
+ * class Preparation pour l'etat Preparation des plats
+ */
 public class Preparation implements CommandeEtat{
     /**
      *

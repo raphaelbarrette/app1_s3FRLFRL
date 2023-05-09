@@ -5,6 +5,9 @@ import ingredients.instanceIngredient.Ingredient;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * class ingredientPlat qui gere la recette d'ingredient necessite pour un plat
+ */
 public class ingredientPlat {
     // array of ingredients needed for a plate
     private ArrayList<Ingredient> recette;

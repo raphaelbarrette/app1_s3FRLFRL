@@ -6,6 +6,9 @@ import ingredients.instanceIngredient.Ingredient;
 import ingredients.instanceIngredient.Viande;
 import ingredients.instanceIngredient.groupeIngredient;
 
+/**
+ * instancie object Viande
+ */
 public class ConcreteCreatorViande implements creatorIngredient {
     /**
      *

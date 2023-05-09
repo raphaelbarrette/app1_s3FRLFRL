@@ -1,5 +1,8 @@
 package menufact.plats.etatPlat;
 
+/**
+ * class Servi pour l'etat Servi des plats
+ */
 public class Servi implements CommandeEtat{
     /**
      *

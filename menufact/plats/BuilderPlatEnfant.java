@@ -1,5 +1,8 @@
 package menufact.plats;
 
+/**
+ * class BuilderPlatEnfant pour le builder des plats
+ */
 public class BuilderPlatEnfant extends BuilderPlat{
     /**
      * constructor de PlatEnfant
@@ -25,7 +28,7 @@ public class BuilderPlatEnfant extends BuilderPlat{
     }
 
     /**
-     * remplace le plat par un autre
+     * remplace le plat par un autre nouveau vide
      */
     public void clear(){
         plat = new PlatEnfant();

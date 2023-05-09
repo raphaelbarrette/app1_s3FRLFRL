@@ -1,5 +1,8 @@
 package menufact.facture;
 
+/**
+ * class FactureEtatPayee pour l'etat payee
+ */
 public class FactureEtatPayee implements FactureEtat{
     /**
      *

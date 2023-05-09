@@ -225,14 +225,6 @@ public class Facture {
 
     /**
      *
-     * @return ArrayList de platChoisi
-     */
-    public ArrayList<PlatChoisi> getPlatChoisi(){
-        return platchoisi;
-    }
-
-    /**
-     *
      * @return courant de la facture
      */
     public int getCourant(){

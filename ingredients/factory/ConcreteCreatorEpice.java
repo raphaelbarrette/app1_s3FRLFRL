@@ -6,6 +6,9 @@ import ingredients.instanceIngredient.EtatIngredient;
 import ingredients.instanceIngredient.Ingredient;
 import ingredients.instanceIngredient.groupeIngredient;
 
+/**
+ * instancie un object Epice
+ */
 public class ConcreteCreatorEpice implements creatorIngredient {
     /**
      *

@@ -1,5 +1,8 @@
 package menufact.facture;
 
+/**
+ * interface pour les Etats de la facture
+ */
 public interface FactureEtat {
     /**
      *
