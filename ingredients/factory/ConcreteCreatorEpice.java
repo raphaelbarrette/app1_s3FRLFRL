@@ -11,7 +11,7 @@ import ingredients.instanceIngredient.groupeIngredient;
  */
 public class ConcreteCreatorEpice implements creatorIngredient {
     /**
-     *
+     * cree object Epice
      * @param nom de l'ingredient
      * @param etat de l'ingredient
      * @return ingredient creer
@@ -22,7 +22,7 @@ public class ConcreteCreatorEpice implements creatorIngredient {
     }
 
     /**
-     *
+     * cree object Epice
      * @param groupe de l'ingredient
      * @param nom de l'ingredient
      * @return l'ingredient

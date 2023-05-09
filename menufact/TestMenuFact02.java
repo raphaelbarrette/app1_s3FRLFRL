@@ -226,13 +226,13 @@ class FactureControllerTest {
         controller.associerClient(kevin);
         controller.observer(gustau);
 
-        String expectedString= "menufact.facture.Facture{date=null, description='Ma facture', etat=Facture etat ouverte, platchoisi=[], courant=-1, client=menufact.Client{idClient=1, nom='kevin', numeroCarteCredit='abshsh'}, TPS=0.05, TVQ=0.095}";
+        String expectedString= "menufact.facture.Facture{date="+facture.getDate()+", description='Ma facture', etat=Facture etat ouverte, platchoisi=[], courant=-1, client=menufact.Client{idClient=1, nom='kevin', numeroCarteCredit='abshsh'}, TPS=0.05, TVQ=0.095}";
 
 
         assertEquals(expectedString, controller.afficheFacture());
 
 
-        String expectedString2= "menufact.facture.Facture{date=null, description='Ma facture', etat=Facture etat ouverte, platchoisi=[menufact.plats.PlatChoisi{quantite=2, plat=menufact.plats.PlatAuMenu{code=1, description='menoum plat aux fruits', prix=10.0}\n}], courant=-1, client=menufact.Client{idClient=1, nom='kevin', numeroCarteCredit='abshsh'}, TPS=0.05, TVQ=0.095}";
+        String expectedString2= "menufact.facture.Facture{date="+facture.getDate()+", description='Ma facture', etat=Facture etat ouverte, platchoisi=[menufact.plats.PlatChoisi{quantite=2, plat=menufact.plats.PlatAuMenu{code=1, description='menoum plat aux fruits', prix=10.0}\n}], courant=-1, client=menufact.Client{idClient=1, nom='kevin', numeroCarteCredit='abshsh'}, TPS=0.05, TVQ=0.095}";
         controller.ajoutePlat(pch1);
         assertEquals(expectedString2, controller.afficheFacture());
 
@@ -246,7 +246,7 @@ class FactureControllerTest {
         controller.ajoutePlat(pch1);
         controller.payer();
         String expectedString="Facture generee.\n" +
-                "Date:null\n" +
+                "Date:"+facture.getDate()+"\n" +
                 "Description: Ma facture\n" +
                 "Client:kevin\n" +
                 "Les plats commandes:\n" +

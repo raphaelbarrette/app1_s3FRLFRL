@@ -8,7 +8,7 @@ import ingredients.exceptions.IngredientException;
 public class Epice extends Ingredient
 {
     /**
-     *
+     * constructeur epice avec nom et etat
      * @param nom de l'Epice
      * @param etat de l'epice
      */
@@ -18,7 +18,7 @@ public class Epice extends Ingredient
     }
 
     /**
-     *
+     * constructeur epice avec nom, etat et quantite
      * @param nom de l'Epice
      * @param etat de l'Epice
      * @param qty de l'Epice
@@ -31,7 +31,7 @@ public class Epice extends Ingredient
     }
 
     /**
-     *
+     * constructeur epice avec groupeingredient et nom
      * @param groupeingredient de l'Epice
      * @param nom de l'Epice
      */

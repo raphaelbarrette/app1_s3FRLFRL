@@ -11,7 +11,7 @@ import ingredients.instanceIngredient.groupeIngredient;
  */
 public class ConcreteCreatorFruit implements creatorIngredient {
     /**
-     *
+     * cree object Fruit
      * @param nom de l'ingredient
      * @param etat de l'ingredient
      * @return l'ingredient creer
@@ -22,7 +22,7 @@ public class ConcreteCreatorFruit implements creatorIngredient {
     }
 
     /**
-     *
+     * Cree object Fruit
      * @param groupe de l'ingredient
      * @param nom de l'ingredient
      * @return

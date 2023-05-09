@@ -11,7 +11,7 @@ public class EtatLiquide implements EtatIngredient {
     private String etat="liquide";
 
     /**
-     *
+     * constructeur de l'etat liquide avec quantite
      * @param qty quantite de l'ingredient
      * @throws IngredientException
      */
@@ -20,7 +20,7 @@ public class EtatLiquide implements EtatIngredient {
     }
 
     /**
-     *
+     * retourne quantite de l'ingredient
      * @return quantite de l'ingredient
      */
     public double get_Qty(){
@@ -28,7 +28,7 @@ public class EtatLiquide implements EtatIngredient {
     }
 
     /**
-     *
+     * retourne l'etat de l'ingredient
      * @return etat de l'ingredient
      */
     public String getEtat(){
@@ -36,7 +36,7 @@ public class EtatLiquide implements EtatIngredient {
     }
 
     /**
-     *
+     * set la quantite de l'ingredient
      * @param qty a set a l'ingredient
      * @throws IngredientException
      */
@@ -49,7 +49,7 @@ public class EtatLiquide implements EtatIngredient {
     }
 
     /**
-     *
+     *  retourne String de l'ingredient
      * @return String a afficher
      */
     public String toString(){
@@ -57,7 +57,7 @@ public class EtatLiquide implements EtatIngredient {
     }
 
     /**
-     *
+     * verifie si un object EtatLiquide est egal a un autre
      * @param other object a comparer l'egalite
      * @return true si egal, false si faux
      */
@@ -73,7 +73,7 @@ public class EtatLiquide implements EtatIngredient {
     }
 
     /**
-     *
+     * ajoute un object EtatLiquide a un autre
      * @param other ingredient a ajouter la quantite
      */
     public void addQty(Object other){

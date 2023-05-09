@@ -10,7 +10,7 @@ import ingredients.instanceIngredient.groupeIngredient;
  */
 public interface creatorIngredient {
     /**
-     *
+     * cree object Ingredient
      * @param nom de l'ingredient
      * @param etat de l'ingredient
      * @return l'ingredient creer
@@ -19,7 +19,7 @@ public interface creatorIngredient {
     public Ingredient creer(String nom,EtatIngredient etat) throws IngredientException;
 
     /**
-     *
+     * cree object Ingredient
      * @param groupe de l'ingredient
      * @param nom de l'ingredient
      * @return l'ingredient creer

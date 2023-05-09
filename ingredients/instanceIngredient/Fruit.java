@@ -7,7 +7,7 @@ import ingredients.exceptions.IngredientException;
  */
 public class Fruit extends Ingredient {
     /**
-     *
+     * constructeur de Fruit avec nom et etat
      * @param nom du Fruit
      * @param etat du Fruit
      */
@@ -17,7 +17,7 @@ public class Fruit extends Ingredient {
     }
 
     /**
-     *
+     * constructeur de fruit avec nom, etat et quantite
      * @param nom du Fruit
      * @param etat du Fruit
      * @param qty du Fruit
@@ -30,7 +30,7 @@ public class Fruit extends Ingredient {
     }
 
     /**
-     *
+     * constructeur de Fruit avec groupeingredient et nom
      * @param groupeingredient du Fruit
      * @param nom du Fruit
      */

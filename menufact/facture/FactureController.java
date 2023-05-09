@@ -144,6 +144,7 @@ public class FactureController {
         view.setTpsPlat(modele.tps());
         view.setTvqPlat(modele.tvq());
         view.setTotal(modele.total());
+        view.setDate(modele.getDate());
         return view.genererFacture();
     }
 }

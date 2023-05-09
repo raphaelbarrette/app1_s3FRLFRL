@@ -10,7 +10,7 @@ public class EtatSolide implements EtatIngredient {
     private String etat="Solide";
 
     /**
-     *
+     * constructeur d'etat solide avec quantite
      * @param qty de l'ingredient
      * @throws IngredientException
      */
@@ -19,7 +19,7 @@ public class EtatSolide implements EtatIngredient {
     }
 
     /**
-     *
+     * set une quantite a l'ingredient
      * @param qty a set a l'ingredient
      * @throws IngredientException
      */
@@ -32,7 +32,7 @@ public class EtatSolide implements EtatIngredient {
     }
 
     /**
-     *
+     * retourne la quantite de l'ingredient
      * @return quantite de l'ingredient
      */
     public double get_Qty(){
@@ -40,7 +40,7 @@ public class EtatSolide implements EtatIngredient {
     }
 
     /**
-     *
+     * retourne String de l'ingredient
      * @return String a afficher
      */
     public String toString(){
@@ -48,7 +48,7 @@ public class EtatSolide implements EtatIngredient {
     }
 
     /**
-     *
+     * retourne l'etat de l'ingredient
      * @return etat de l'ingredient
      */
     public String getEtat(){
@@ -56,7 +56,7 @@ public class EtatSolide implements EtatIngredient {
     }
 
     /**
-     *
+     * verifie si un object EtatSolide est egale a un autre
      * @param other object a comparer l'egalite
      * @return vrai si egal, faux sinon
      */
@@ -71,7 +71,7 @@ public class EtatSolide implements EtatIngredient {
     }
 
     /**
-     *
+     * ajoute les quantite d'un EtatSolide a un autre
      * @param other ingredient a ajouter la quantite
      */
     public void addQty(Object other){
