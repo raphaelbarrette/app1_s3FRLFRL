@@ -142,7 +142,7 @@ class chefTest {
         assertEquals("Kevin", nom);
     }
     @Test
-     void cuisiner() throws IngredientException, PlatException {
+     void cuisiner() throws IngredientException, PlatException, MenuException {
         Ingredient frite = new Legume("frite", new EtatSolide(25));
         Ingredient fromage = new Laitier("fromage", new EtatSolide(20));
         Ingredient sauce = new Epice("sauce", new EtatLiquide(1));
@@ -548,7 +548,7 @@ class PlatChoisiTest {
     }
 
     @Test
-    public void testPlatChoisiSetEtatValide() throws PlatException {
+    public void testPlatChoisiSetEtatValide() throws PlatException, MenuException {
         PlatAuMenu plat = new PlatAuMenu(1, "Plat test", 10.0);
         PlatChoisi platChoisi = new PlatChoisi(plat, 2);
 

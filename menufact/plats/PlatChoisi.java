@@ -1,5 +1,6 @@
 package menufact.plats;
 
+import menufact.exceptions.MenuException;
 import menufact.plats.PlatAuMenu;
 import menufact.plats.etatPlat.CommandeEtat;
 import menufact.plats.exceptions.PlatException;
@@ -75,13 +76,13 @@ public class PlatChoisi {
      *
      * @param etat2 state to change to
      */
-    public void setEtat(CommandeEtat etat2){
+    public void setEtat(CommandeEtat etat2) throws MenuException {
         if (etat == null){
             this.etat = etat2;
         } else if (etat.changerEtat(etat2)) {
             this.etat = etat2;
         } else {
-            //throw exception
+            throw new MenuException("caca");
         }
 
     }

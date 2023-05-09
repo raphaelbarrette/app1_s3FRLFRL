@@ -3,6 +3,7 @@ package menufact;
 import ingredients.exceptions.IngredientException;
 import ingredients.instanceIngredient.Ingredient;
 import inventaire.Inventaire;
+import menufact.exceptions.MenuException;
 import menufact.plats.PlatChoisi;
 import menufact.plats.etatPlat.*;
 import inventaire.ingredientPlat;
@@ -57,13 +58,7 @@ public class chef {
     public String toString(){
         return "Chef : " + nom + "\n";
     }
-
-    /**
-     * set etat a preparation et consomme les ingredients
-     * @param platapreparer plat pour consommer l'inventaire
-     * @throws IngredientException
-     */
-    private void preparer(PlatChoisi platapreparer) throws IngredientException {
+    private void preparer(PlatChoisi platapreparer) throws IngredientException, MenuException {
         platapreparer.setEtat(new Preparation());
 
         Inventaire inventaire = Inventaire.getInstance();
@@ -79,7 +74,7 @@ public class chef {
      * @return vrai si ingredient dans l'inventaire, false sinon
      */
 
-    private boolean verifierIngredient(PlatChoisi plat) throws IngredientException{
+    private boolean verifierIngredient(PlatChoisi plat) throws IngredientException, MenuException {
         Inventaire inventaire = Inventaire.getInstance();
         ingredientPlat recette = plat.getPlat().getRecette();
         for (Ingredient ingredient : recette.getRecette()){
@@ -95,32 +90,14 @@ public class chef {
         return true;
     }
 
-    /**
-     * set etat du plat a Terminer
-     * @param plat a terminer
-     */
-    private void terminer(PlatChoisi plat){
+    private void terminer(PlatChoisi plat) throws MenuException {
         plat.setEtat(new Terminer());
     }
-
-    /**
-     *
-     * @param plat a servir
-     * @return le plat servi
-     */
-    private PlatChoisi servir(PlatChoisi plat){
+    private PlatChoisi servir(PlatChoisi plat) throws MenuException {
         plat.setEtat(new Servi());
         return plat;
     }
-
-    /**
-     *
-     * @param plat a cuisiner
-     * @return le plat qui est cuisiner
-     * @throws IngredientException si ingredient pas dans inventaire
-     * @throws PlatException
-     */
-    public PlatChoisi cuisiner(PlatChoisi plat) throws IngredientException, PlatException {
+    public PlatChoisi cuisiner(PlatChoisi plat) throws IngredientException, PlatException, MenuException {
         plat.setEtat(new Commande());
         if(verifierIngredient(plat)){
             preparer(plat);

@@ -85,11 +85,6 @@ public abstract class Ingredient {
         return false;
     }
 
-    /**
-     *
-     * @return groupe de l'ingredient
-     */
-    public groupeIngredient getGroupe(){
-        return groupe;
-    }
+
+
 }

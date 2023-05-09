@@ -2,6 +2,7 @@ package menufact.facture;
 
 import ingredients.exceptions.IngredientException;
 import menufact.Client;
+import menufact.exceptions.MenuException;
 import menufact.facture.exceptions.FactureException;
 import menufact.plats.PlatChoisi;
 import menufact.chef;
@@ -147,6 +148,8 @@ public class Facture {
                     platchoisi.add(p);
                 } catch (IngredientException ingredientException){
                     System.out.println("Pas asser d'ingredient" + ingredientException.getMessage());
+                } catch (MenuException e) {
+                    throw new RuntimeException(e);
                 }
             }
         } else {
@@ -223,10 +226,6 @@ public class Facture {
         return description;
     }
 
-    /**
-     *
-     * @return courant de la facture
-     */
     public int getCourant(){
         return courant;
     }
