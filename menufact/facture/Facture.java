@@ -63,7 +63,7 @@ public class Facture {
      *
      * @return la valeur de la TPS
      */
-    private double tps(){
+    public double tps(){
         return TPS*sousTotal();
     }
 
@@ -71,8 +71,8 @@ public class Facture {
      *
      * @return la valeur de la TVQ
      */
-    private  double tvq(){
-        return TVQ*(TPS+1)*sousTotal();
+    public  double tvq(){
+        return TVQ*sousTotal();
     }
 
     /**
@@ -90,7 +90,7 @@ public class Facture {
      */
     public void fermer() throws FactureException{
        if (etat.changerEtat(new FactureEtatFermee())){
-           etat = new FactureEtatPayee();
+           etat = new FactureEtatFermee();
        } else {
            throw new FactureException("Facture impossible fermer");
        }
@@ -176,6 +176,8 @@ public class Facture {
      *
      * @return une chaîne de caractères avec la facture à imprimer
      */
+
+    /*
     public String genererFacture()
     {
         String lesPlats = new String();
@@ -203,7 +205,53 @@ public class Facture {
 
         return factureGenere;
     }
+    */
+
+    /**
+     *
+     * @param cuisinier object class chef a associer
+     */
     public void observer(chef cuisinier){
         chef = cuisinier;
+    }
+
+    /**
+     *
+     * @return description Facture
+     */
+    public String getDescription(){
+        return description;
+    }
+
+    /**
+     *
+     * @return courant de la facture
+     */
+    public int getCourant(){
+        return courant;
+    }
+
+    /**
+     *
+     * @return client associer a la facture
+     */
+    public Client getClient(){
+        return client;
+    }
+
+    /**
+     *
+     * @return chef associer a la facture
+     */
+    public chef getChef(){
+        return chef;
+    }
+
+    /**
+     *
+     * @return ArrayList de PlatChoisi
+     */
+    public ArrayList<PlatChoisi> getPlatsChoisis(){
+        return platchoisi;
     }
 }

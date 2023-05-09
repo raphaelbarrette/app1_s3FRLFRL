@@ -2,21 +2,35 @@ package menufact.plats;
 
 import menufact.plats.PlatAuMenu;
 import menufact.plats.etatPlat.CommandeEtat;
+import menufact.plats.exceptions.PlatException;
 
+/**
+ * class PlatChoisi pour les plat choisi a ajouter au menu
+ */
 public class PlatChoisi {
     private PlatAuMenu plat;
     private int quantite;
     private CommandeEtat etat;
 
-    public PlatChoisi(PlatAuMenu plat, int quantite) {
+    /**
+     *
+     * @param plat a mettre comme plat choisi
+     * @param quantite quantite du plat a ajouter
+     * @throws PlatException
+     */
+    public PlatChoisi(PlatAuMenu plat, int quantite) throws PlatException{
         this.plat = plat;
         if (quantite >= 0) {
             this.quantite = quantite;
         } else {
-            //throw exception
+            throw new PlatException("quantite negative");
         }
     }
 
+    /**
+     *
+     * @return String a afficher
+     */
     @Override
     public String toString() {
         return "menufact.plats.PlatChoisi{" +
@@ -25,17 +39,34 @@ public class PlatChoisi {
                 '}';
     }
 
+    /**
+     *
+     * @return quantite du plat
+     */
     public int getQuantite() {
         return quantite;
     }
 
+    /**
+     *
+     * @param quantite du plat a set
+     */
     public void setQuantite(int quantite) {
         this.quantite = quantite;
     }
 
+    /**
+     *
+     * @return plat
+     */
     public PlatAuMenu getPlat() {
         return plat;
     }
+
+    /**
+     *
+     * @return etat du plat
+     */
     public CommandeEtat getEtat(){
         return etat;
     }
